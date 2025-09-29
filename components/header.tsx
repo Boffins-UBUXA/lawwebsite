@@ -24,20 +24,20 @@ export function Header() {
       <div className="bg-secondary text-secondary-foreground py-2 text-sm">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-6">
-              <div className="flex items-center space-x-2">
-                <Phone className="h-4 w-4" />
-                <span>+1 (289) 838-2982</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Mail className="h-4 w-4" />
-                <span>info@bekwynlaw.com</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Phone className="h-4 w-4" />
-                <span>+1 (289) 838-2982</span>
-              </div>
-            </div>
+          <div className="flex flex-col space-y-4 sm:flex-row sm:items-center sm:space-x-6 sm:space-y-0">
+           <div className="flex items-center space-x-2">
+            <Phone className="h-4 w-4" />
+          <span>+1 (289) 838-2982</span>
+          </div>
+          <div className="flex items-center space-x-2">
+         <Mail className="h-4 w-4" />
+         <span>info@bekwynlaw.com</span>
+       </div>
+        <div className="flex items-center space-x-2">
+    <Phone className="h-4 w-4" />
+    <span>+1 (289) 838-2982</span>
+  </div>
+</div>
             <div className="flex items-center space-x-3">
               <Facebook className="h-4 w-4 hover:text-primary cursor-pointer transition-colors" />
               <Twitter className="h-4 w-4 hover:text-primary cursor-pointer transition-colors" />
@@ -51,7 +51,7 @@ export function Header() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
             <Link href="/" className="flex items-center space-x-3">
-              <div className=" ">
+              <div className="shadow-[1px_1px_#ccc] rounded-lg">
                 <img src="/goldonly-removebg-preview.png"
                   alt="logo" className="h-16 w-16 rounded-lg" />
               </div>
