@@ -52,13 +52,13 @@ export function Header() {
           <div className="flex items-center justify-between h-20">
             <Link href="/" className="flex items-center space-x-3">
               <div className=" ">
-                <img src="/bluelogo.png"
+                <img src="/goldonly-removebg-preview.png"
                   alt="logo" className="h-16 w-16 rounded-lg" />
               </div>
-              <div>
+              {/* <div>
                 <div className="text-2xl font-serif font-bold text-primary">BL</div>
                 <div className="text-xs text-muted-foreground uppercase tracking-wider">Law Office</div>
-              </div>
+              </div> */}
             </Link>
 
             {/* Desktop Navigation */}
