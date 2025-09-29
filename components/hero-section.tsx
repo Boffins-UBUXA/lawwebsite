@@ -324,7 +324,7 @@ export function HeroSection() {
                   className="border-2 border-white text-white hover:bg-white hover:text-primary text-lg px-8 py-4 font-semibold bg-transparent"
                 >
                   <Phone className="mr-2 h-5 w-5" />
-                  +1 (416) 227 8400
+                  +1 (289) 838-2982
                 </Button>
               </motion.div>
             </motion.div>
