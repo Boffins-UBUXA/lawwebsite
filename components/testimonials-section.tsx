@@ -28,7 +28,7 @@ export function TestimonialsSection() {
       content:
         "The estate planning services were thorough and professional. They explained everything clearly and ensured my family's future is secure. I highly recommend their services to anyone needing legal assistance.",
       rating: 5,
-      image: "/professional-woman-headshot.png",
+      image: "/professional-man-headshot.png",
     },
   ]
 
