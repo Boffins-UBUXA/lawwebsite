@@ -87,14 +87,7 @@ export function Footer() {
                 </a>
               </li>
               <li>
-                <span className="text-sm text-accent font-medium"><a 
-                  href="https://calendly.com/your-calendar-link" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-sm text-accent font-medium hover:text-accent/80 transition-colors"
-                >
-                  Free Consultation
-                </a></span>
+                <span className="text-sm text-accent font-medium">Free Consultation</span>
               </li>
             </ul>
           </div>
