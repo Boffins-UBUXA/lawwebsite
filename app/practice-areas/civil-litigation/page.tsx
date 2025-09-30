@@ -200,7 +200,7 @@ export default function CivilLitigationPage() {
                     className="border-primary text-primary hover:bg-primary hover:text-white bg-transparent"
                   >
                     <Phone className="h-4 w-4 mr-2" />
-                    Call (416) 227-8400
+                    Call +1 (289) 838-2982
                   </Button>
                 </div>
               </motion.div>

@@ -18,7 +18,7 @@ export function Footer() {
           <div className="lg:col-span-2">
             <div className="flex items-center space-x-2 mb-4">
               {/* <Scale className="h-8 w-8 text-accent" /> */}
-              <img src="/bluebackgroundlogo.png"
+              <img src="/goldonly-removebg-preview.png"
                   alt="logo" className="h-16 w-16 rounded-lg" />
               <div className="text-2xl font-serif font-bold">Bekwyn Law PC</div>
             </div>
@@ -87,7 +87,14 @@ export function Footer() {
                 </a>
               </li>
               <li>
-                <span className="text-sm text-accent font-medium">Free Consultation</span>
+                <span className="text-sm text-accent font-medium"><a 
+                  href="https://calendly.com/your-calendar-link" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-sm text-accent font-medium hover:text-accent/80 transition-colors"
+                >
+                  Free Consultation
+                </a></span>
               </li>
             </ul>
           </div>

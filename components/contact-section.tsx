@@ -26,7 +26,7 @@ export function ContactSection() {
                     <Phone className="h-5 w-5 text-accent" />
                   </div>
                   <div>
-                    <p className="font-medium text-foreground">[Phone Number]</p>
+                    <p className="font-medium text-foreground">+1 (289) 838-2982</p>
                     <p className="text-sm text-muted-foreground">Call for immediate assistance</p>
                   </div>
                 </div>
@@ -36,7 +36,7 @@ export function ContactSection() {
                     <Mail className="h-5 w-5 text-accent" />
                   </div>
                   <div>
-                    <p className="font-medium text-foreground">[Email Address]</p>
+                    <p className="font-medium text-foreground">info@bekwynlaw.com</p>
                     <p className="text-sm text-muted-foreground">Send us your inquiry</p>
                   </div>
                 </div>
