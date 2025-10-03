@@ -18,8 +18,10 @@ export function Footer() {
           <div className="lg:col-span-2">
             <div className="flex items-center space-x-2 mb-4">
               {/* <Scale className="h-8 w-8 text-accent" /> */}
+              <div className="shadow-[2px_2px_7px_#ccc] rounded-lg">
               <img src="/goldonly-removebg-preview.png"
                   alt="logo" className="h-16 w-16 rounded-lg" />
+                  </div>
               <div className="text-2xl font-serif font-bold">Bekwyn Law PC</div>
             </div>
             <p className="text-primary-foreground/80 mb-6 text-pretty">
