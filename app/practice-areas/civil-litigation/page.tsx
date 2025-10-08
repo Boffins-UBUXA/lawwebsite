@@ -1,4 +1,5 @@
 "use client"
+
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
@@ -78,9 +79,10 @@ export default function CivilLitigationPage() {
   ]
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen flex flex-col">
       <Header />
-      <main>
+
+      <main className="flex-grow">
         {/* Hero Section */}
         <motion.section
           initial={{ opacity: 0 }}
@@ -90,14 +92,12 @@ export default function CivilLitigationPage() {
         >
           <div
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-            style={{
-              backgroundImage: `url('/practice-litigation.jpg')`,
-            }}
+            style={{ backgroundImage: "url('/practice-litigation.jpg')" }}
           />
-          <div className="absolute inset-0 bg-gradient-to-br from-primary/60 via-primary/50 to-primary/40"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-primary/50 to-primary/30"></div>
 
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div className="max-w-4xl mx-auto text-white">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-white">
+            <div className="max-w-4xl mx-auto">
               <motion.div
                 initial={{ y: 30, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
@@ -107,22 +107,24 @@ export default function CivilLitigationPage() {
                 <div className="bg-secondary/20 p-4 rounded-xl">
                   <Scale className="h-12 w-12 text-secondary" />
                 </div>
-                <h1 className="text-4xl md:text-5xl font-serif font-bold text-balance">Civil Litigation</h1>
+                <h1 className="text-4xl md:text-5xl font-serif font-bold text-balance">
+                  Civil Litigation
+                </h1>
               </motion.div>
               <motion.p
                 initial={{ y: 30, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
-                className="text-xl text-blue-100 text-pretty leading-relaxed"
+                className="text-xl text-blue-100 leading-relaxed"
               >
                 Experienced civil litigation representation for complex disputes, personal injury claims, contract
-                breaches, and all civil court matters with strategic advocacy and results-focused approach.
+                breaches, and all civil court matters with strategic advocacy and a results-focused approach.
               </motion.p>
             </div>
           </div>
         </motion.section>
 
-        {/* Main Content */}
+        {/* Services Section */}
         <section className="py-16 bg-white">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-6xl mx-auto">
@@ -132,17 +134,17 @@ export default function CivilLitigationPage() {
                 viewport={{ once: true }}
                 className="mb-12"
               >
-                <h2 className="text-3xl font-serif font-bold text-primary mb-6">Our Civil Litigation Practice</h2>
+                <h2 className="text-3xl font-serif font-bold text-primary mb-6">
+                  Our Civil Litigation Practice
+                </h2>
                 <p className="text-lg text-muted-foreground leading-relaxed">
                   When disputes cannot be resolved through negotiation, experienced litigation counsel becomes
                   essential. Our civil litigation practice provides strategic representation in complex disputes,
-                  personal injury claims, and commercial conflicts. We combine thorough preparation with aggressive
-                  advocacy to achieve the best possible outcomes for our clients.
+                  personal injury claims, and commercial conflicts.
                 </p>
               </motion.div>
 
-              {/* Services Grid */}
-              <div className="grid lg:grid-cols-2 gap-8 mb-16">
+              <div className="grid lg:grid-cols-2 gap-8 mb-16 items-stretch">
                 {services.map((service, index) => (
                   <motion.div
                     key={index}
@@ -150,21 +152,24 @@ export default function CivilLitigationPage() {
                     whileInView={{ y: 0, opacity: 1 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, delay: index * 0.1 }}
+                    className="flex"
                   >
-                    <Card className="h-full hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border-l-4 border-l-secondary">
-                      <CardContent className="p-6">
-                        <div className="flex items-start space-x-3 mb-4">
-                          <ArrowRight className="h-5 w-5 text-secondary flex-shrink-0 mt-1" />
-                          <div>
-                            <h3 className="text-xl font-semibold text-primary mb-3">{service.title}</h3>
-                            <p className="text-muted-foreground leading-relaxed mb-4">{service.description}</p>
+                    <Card className="h-full flex flex-col justify-between hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border-l-4 border-l-secondary">
+                      <CardContent className="p-6 flex flex-col justify-between h-full">
+                        <div>
+                          <div className="flex items-start space-x-3 mb-4">
+                            <ArrowRight className="h-5 w-5 text-secondary mt-1" />
+                            <div>
+                              <h3 className="text-xl font-semibold text-primary mb-3">{service.title}</h3>
+                              <p className="text-muted-foreground leading-relaxed mb-4">
+                                {service.description}
+                              </p>
+                            </div>
                           </div>
-                        </div>
-                        <div className="ml-8">
-                          <ul className="space-y-2">
+                          <ul className="ml-8 space-y-2">
                             {service.details.map((detail, detailIndex) => (
                               <li key={detailIndex} className="flex items-start space-x-2">
-                                <CheckCircle className="h-4 w-4 text-secondary flex-shrink-0 mt-0.5" />
+                                <CheckCircle className="h-4 w-4 text-secondary mt-0.5" />
                                 <span className="text-sm text-muted-foreground">{detail}</span>
                               </li>
                             ))}
@@ -176,14 +181,15 @@ export default function CivilLitigationPage() {
                 ))}
               </div>
 
-              {/* Call to Action */}
               <motion.div
                 initial={{ y: 30, opacity: 0 }}
                 whileInView={{ y: 0, opacity: 1 }}
                 viewport={{ once: true }}
                 className="bg-gray-50 rounded-2xl p-8 text-center"
               >
-                <h3 className="text-2xl font-serif font-bold text-primary mb-4">Need Litigation Representation?</h3>
+                <h3 className="text-2xl font-serif font-bold text-primary mb-4">
+                  Need Litigation Representation?
+                </h3>
                 <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
                   Complex disputes require experienced litigation counsel. Contact us for strategic representation and
                   aggressive advocacy in your civil litigation matter.
@@ -195,13 +201,15 @@ export default function CivilLitigationPage() {
                       Schedule Consultation
                     </Button>
                   </Link>
-                  <Button
-                    variant="outline"
-                    className="border-primary text-primary hover:bg-primary hover:text-white bg-transparent"
-                  >
-                    <Phone className="h-4 w-4 mr-2" />
-                    Call +1 (289) 838-2982
-                  </Button>
+                  <a href="tel:+12898382982">
+                    <Button
+                      variant="outline"
+                      className="border-primary text-primary hover:bg-primary hover:text-white bg-transparent"
+                    >
+                      <Phone className="h-4 w-4 mr-2" />
+                      Call +1 (289) 838-2982
+                    </Button>
+                  </a>
                 </div>
               </motion.div>
             </div>

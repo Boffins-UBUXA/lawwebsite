@@ -1,4 +1,5 @@
 "use client"
+
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
@@ -12,49 +13,49 @@ export default function ImmigrationRefugeeLawPage() {
     {
       title: "Family Class Sponsorship",
       description:
-        "Help reunite families by sponsoring spouses, children, parents, and grandparents to come to Canada. We guide you through the complex application process, ensuring all documentation is properly prepared and submitted.",
+        "Helping reunite families by sponsoring spouses, children, parents, and grandparents to come to Canada.",
     },
     {
-      title: "Work Permits & Study Permits",
+      title: "Work & Study Permits",
       description:
-        "Assist with temporary residence applications for work and study purposes, including LMIA applications, post-graduation work permits, and study permit extensions.",
+        "Assisting with LMIA applications, post-graduation work permits, study permit extensions, and renewals.",
     },
     {
       title: "Permanent Residence Applications",
       description:
-        "Guide you through Express Entry, Provincial Nominee Programs, Canadian Experience Class, and other immigration pathways to achieve your goal of permanent residence in Canada.",
+        "Guiding clients through Express Entry, PNP, and Canadian Experience Class applications for PR.",
     },
     {
       title: "Refugee Protection Claims",
       description:
-        "Provide comprehensive legal representation for those seeking protection in Canada, including refugee hearings, pre-removal risk assessments, and humanitarian applications.",
+        "Providing legal representation for refugee hearings, pre-removal risk assessments, and humanitarian applications.",
     },
     {
       title: "Citizenship Applications",
       description:
-        "Help eligible permanent residents become Canadian citizens through the citizenship application process, including preparation for citizenship tests and ceremonies.",
+        "Helping permanent residents apply for and obtain Canadian citizenship with confidence.",
     },
     {
       title: "Appeals & Judicial Reviews",
       description:
-        "Represent clients in immigration appeals before the Immigration Appeal Division and federal court judicial review proceedings for refused applications.",
+        "Handling immigration appeals and judicial reviews for refused or delayed applications.",
     },
     {
       title: "Business Immigration",
       description:
-        "Assist entrepreneurs and investors with business immigration programs, including start-up visa programs and self-employed persons programs.",
+        "Supporting entrepreneurs and investors through start-up visa and self-employed programs.",
     },
     {
       title: "Inadmissibility Issues",
       description:
-        "Help clients overcome inadmissibility issues including criminal inadmissibility, medical inadmissibility, and misrepresentation concerns.",
+        "Advising clients on overcoming criminal, medical, or misrepresentation inadmissibility matters.",
     },
   ]
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen flex flex-col">
       <Header />
-      <main>
+      <main className="flex-grow">
         {/* Hero Section */}
         <motion.section
           initial={{ opacity: 0 }}
@@ -64,14 +65,12 @@ export default function ImmigrationRefugeeLawPage() {
         >
           <div
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-            style={{
-              backgroundImage: `url('/practice-immigration.jpg')`,
-            }}
+            style={{ backgroundImage: "url('/practice-immigration.jpg')" }}
           />
-          <div className="absolute inset-0 bg-gradient-to-br from-primary/60 via-primary/50 to-primary/40"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-primary/50 to-primary/30"></div>
 
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div className="max-w-4xl mx-auto text-white">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-white">
+            <div className="max-w-4xl mx-auto">
               <motion.div
                 initial={{ y: 30, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
@@ -81,23 +80,25 @@ export default function ImmigrationRefugeeLawPage() {
                 <div className="bg-secondary/20 p-4 rounded-xl">
                   <Users className="h-12 w-12 text-secondary" />
                 </div>
-                <h1 className="text-4xl md:text-5xl font-serif font-bold text-balance">Immigration & Refugee Law</h1>
+                <h1 className="text-4xl md:text-5xl font-serif font-bold text-balance">
+                  Immigration & Refugee Law
+                </h1>
               </motion.div>
               <motion.p
                 initial={{ y: 30, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
-                className="text-xl text-blue-100 text-pretty leading-relaxed"
+                className="text-xl text-blue-100 leading-relaxed"
               >
-                Comprehensive immigration services to help individuals, families, and businesses navigate Canada's
-                complex immigration system with personalized attention and strategic guidance.
+                Comprehensive immigration and refugee services guiding individuals, families, and businesses through
+                Canada’s complex immigration system with expertise and compassion.
               </motion.p>
             </div>
           </div>
         </motion.section>
 
-        {/* Main Content */}
-        <section className="py-16 bg-white">
+        {/* Services Section */}
+        <section className="py-16 bg-white" id="practice-immigration">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-6xl mx-auto">
               <motion.div
@@ -106,17 +107,16 @@ export default function ImmigrationRefugeeLawPage() {
                 viewport={{ once: true }}
                 className="mb-12"
               >
-                <h2 className="text-3xl font-serif font-bold text-primary mb-6">Our Immigration Law Practice</h2>
+                <h2 className="text-3xl font-serif font-bold text-primary mb-6">
+                  Our Immigration & Refugee Practice
+                </h2>
                 <p className="text-lg text-muted-foreground leading-relaxed">
-                  Our immigration law practice provides comprehensive legal services to individuals, families, and
-                  businesses navigating Canada's complex immigration system. We understand that immigration matters are
-                  deeply personal and can significantly impact your future. Our experienced team is dedicated to
-                  providing personalized attention and strategic guidance throughout your immigration journey.
+                  Our team provides legal support for all aspects of Canadian immigration law — from work and study
+                  permits to appeals and refugee protection — ensuring your case is handled with diligence and care.
                 </p>
               </motion.div>
 
-              {/* Services Grid */}
-              <div className="grid md:grid-cols-2 gap-8 mb-16">
+              <div className="grid md:grid-cols-2 gap-8 mb-16 items-stretch">
                 {services.map((service, index) => (
                   <motion.div
                     key={index}
@@ -124,11 +124,12 @@ export default function ImmigrationRefugeeLawPage() {
                     whileInView={{ y: 0, opacity: 1 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, delay: index * 0.1 }}
+                    className="flex"
                   >
-                    <Card className="h-full hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border-l-4 border-l-secondary">
+                    <Card className="h-full flex flex-col justify-between hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border-l-4 border-l-secondary">
                       <CardContent className="p-6">
                         <div className="flex items-start space-x-3">
-                          <ArrowRight className="h-5 w-5 text-secondary flex-shrink-0 mt-1" />
+                          <ArrowRight className="h-5 w-5 text-secondary mt-1" />
                           <div>
                             <h3 className="text-xl font-semibold text-primary mb-3">{service.title}</h3>
                             <p className="text-muted-foreground leading-relaxed">{service.description}</p>
@@ -140,33 +141,37 @@ export default function ImmigrationRefugeeLawPage() {
                 ))}
               </div>
 
-              {/* Call to Action */}
+              {/* CTA */}
               <motion.div
                 initial={{ y: 30, opacity: 0 }}
                 whileInView={{ y: 0, opacity: 1 }}
                 viewport={{ once: true }}
                 className="bg-gray-50 rounded-2xl p-8 text-center"
+                id="contact"
               >
                 <h3 className="text-2xl font-serif font-bold text-primary mb-4">
-                  Ready to Start Your Immigration Journey?
+                  Ready to Begin Your Immigration Journey?
                 </h3>
                 <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-                  Contact us today for a consultation to discuss your immigration needs and explore your options.
+                  Book a confidential consultation with our immigration lawyers today and take the next step toward your
+                  future in Canada.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Link href="/contact">
+                  <a href="#contact">
                     <Button className="bg-secondary hover:bg-secondary/90 text-white">
                       <Calendar className="h-4 w-4 mr-2" />
                       Schedule Consultation
                     </Button>
-                  </Link>
-                  <Button
-                    variant="outline"
-                    className="border-primary text-primary hover:bg-primary hover:text-white bg-transparent"
-                  >
-                    <Phone className="h-4 w-4 mr-2" />
-                    Call (416) 227-8400
-                  </Button>
+                  </a>
+                  <a href="tel:+14162278400">
+                    <Button
+                      variant="outline"
+                      className="border-primary text-primary hover:bg-primary hover:text-white bg-transparent"
+                    >
+                      <Phone className="h-4 w-4 mr-2" />
+                      Call (416) 227-8400
+                    </Button>
+                  </a>
                 </div>
               </motion.div>
             </div>

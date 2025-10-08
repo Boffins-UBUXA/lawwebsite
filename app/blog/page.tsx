@@ -1,3 +1,5 @@
+"use client"
+
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -9,7 +11,8 @@ export default function BlogPage() {
   const blogPosts = [
     {
       title: "Understanding Immigration Law Changes in 2024",
-      excerpt: "Recent updates to Canadian immigration policies and what they mean for applicants.",
+      excerpt:
+        "Recent updates to Canadian immigration policies and what they mean for applicants looking to relocate, reunite with family, or extend their status in Canada.",
       date: "March 15, 2024",
       author: "Bekwyn Law PC",
       category: "Immigration Law",
@@ -18,7 +21,8 @@ export default function BlogPage() {
     },
     {
       title: "Family Law: Protecting Your Children's Interests",
-      excerpt: "Key considerations when navigating custody and support arrangements during divorce.",
+      excerpt:
+        "Key considerations when navigating custody and support arrangements during divorce, ensuring your children’s emotional and financial security.",
       date: "March 10, 2024",
       author: "Bekwyn Law PC",
       category: "Family Law",
@@ -27,7 +31,8 @@ export default function BlogPage() {
     },
     {
       title: "Estate Planning: Why You Need a Will",
-      excerpt: "The importance of having a properly drafted will and powers of attorney.",
+      excerpt:
+        "The importance of having a properly drafted will and powers of attorney — and how they protect your family’s future and peace of mind.",
       date: "March 5, 2024",
       author: "Bekwyn Law PC",
       category: "Estate Planning",
@@ -36,7 +41,8 @@ export default function BlogPage() {
     },
     {
       title: "Employment Rights: Know Your Protections",
-      excerpt: "Understanding your rights in the workplace and when to seek legal help.",
+      excerpt:
+        "Understanding your rights in the workplace and when to seek legal help to protect yourself from wrongful termination or unfair treatment.",
       date: "February 28, 2024",
       author: "Bekwyn Law PC",
       category: "Employment Law",
@@ -45,7 +51,8 @@ export default function BlogPage() {
     },
     {
       title: "Criminal Defense: Your Rights During Arrest",
-      excerpt: "What you need to know about your rights when facing criminal charges.",
+      excerpt:
+        "What you need to know about your rights when facing criminal charges, and how early legal representation can protect your future.",
       date: "February 20, 2024",
       author: "Bekwyn Law PC",
       category: "Criminal Law",
@@ -54,7 +61,8 @@ export default function BlogPage() {
     },
     {
       title: "Civil Litigation: When to Consider Legal Action",
-      excerpt: "Understanding when civil litigation might be the right path for your dispute.",
+      excerpt:
+        "Understanding when civil litigation might be the right path for your dispute and how Bekwyn Law can help you achieve justice.",
       date: "February 15, 2024",
       author: "Bekwyn Law PC",
       category: "Civil Litigation",
@@ -64,59 +72,65 @@ export default function BlogPage() {
   ]
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen flex flex-col">
       <Header />
-      <main>
-        {/* Hero Section */}
+      <main className="flex-grow">
+        {/* ✅ HERO SECTION */}
         <section className="relative bg-gradient-to-br from-primary via-primary/90 to-primary/80 text-white py-20">
           <div className="absolute inset-0 bg-black/20"></div>
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="max-w-4xl mx-auto text-center">
-              <h1 className="text-4xl md:text-5xl font-serif font-bold mb-6 text-balance">Legal Insights & Updates</h1>
-              <p className="text-xl text-blue-100 text-pretty">
-                Stay informed with the latest legal news, insights, and updates from our experienced legal team
+              <h1 className="text-4xl md:text-5xl font-serif font-bold mb-6 text-balance">
+                Legal Insights & Updates
+              </h1>
+              <p className="text-xl text-blue-100 leading-relaxed">
+                Stay informed with the latest legal news, insights, and updates from our experienced legal team.
               </p>
             </div>
           </div>
         </section>
 
-        {/* Blog Posts Grid */}
+        {/* ✅ BLOG POSTS GRID */}
         <section className="py-16 bg-white">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-8">
+            <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-8 items-stretch">
               {blogPosts.map((post, index) => (
                 <Card
                   key={index}
-                  className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-1 h-full flex flex-col"
+                  className="group flex flex-col justify-between hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
                 >
                   <CardHeader className="pb-4">
-                    <div className="flex items-center justify-between text-sm text-muted-foreground mb-3">
-                      <span className="bg-secondary/10 text-secondary px-3 py-1 rounded-full font-medium">
+                    <div className="flex items-center justify-between text-sm text-muted-foreground mb-3 flex-wrap gap-2">
+                      <span className="bg-secondary/10 text-secondary px-3 py-1 rounded-full font-medium whitespace-nowrap">
                         {post.category}
                       </span>
-                      <span>{post.readTime}</span>
+                      <span className="whitespace-nowrap">{post.readTime}</span>
                     </div>
                     <CardTitle className="text-xl font-serif text-primary group-hover:text-secondary transition-colors line-clamp-2">
                       {post.title}
                     </CardTitle>
                   </CardHeader>
-                  <CardContent className="flex-1 flex flex-col justify-between">
-                    <div className="space-y-4">
-                      <p className="text-muted-foreground leading-relaxed line-clamp-3">{post.excerpt}</p>
 
-                      <div className="flex items-center space-x-4 text-sm text-muted-foreground">
+                  <CardContent className="flex flex-col flex-1 justify-between">
+                    <div className="space-y-4 flex-1">
+                      <p className="text-muted-foreground leading-relaxed line-clamp-3">
+                        {post.excerpt}
+                      </p>
+
+                      <div className="flex items-center flex-wrap gap-3 text-sm text-muted-foreground">
                         <div className="flex items-center space-x-2">
-                          <Calendar className="h-4 w-4" />
+                          <Calendar className="h-4 w-4 flex-shrink-0" />
                           <span>{post.date}</span>
                         </div>
                         <div className="flex items-center space-x-2">
-                          <User className="h-4 w-4" />
+                          <User className="h-4 w-4 flex-shrink-0" />
                           <span>{post.author}</span>
                         </div>
                       </div>
                     </div>
 
-                    <Link href={`/blog/${post.slug}`} className="w-full mt-6">
+                    {/* ✅ Button anchored at bottom */}
+                    <Link href={`/blog/${post.slug}`} className="mt-6">
                       <Button
                         variant="ghost"
                         className="w-full text-secondary hover:bg-secondary hover:text-white group-hover:bg-secondary group-hover:text-white transition-all justify-between"
@@ -132,7 +146,7 @@ export default function BlogPage() {
           </div>
         </section>
 
-        {/* Newsletter Signup */}
+        {/* ✅ NEWSLETTER SIGNUP */}
         <section className="py-16 bg-gray-50">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-4xl mx-auto text-center">
@@ -141,15 +155,27 @@ export default function BlogPage() {
                 Subscribe to our newsletter to receive the latest legal insights, updates, and news directly in your
                 inbox.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
+
+              <form
+                onSubmit={(e) => e.preventDefault()}
+                className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto"
+              >
                 <input
                   type="email"
                   placeholder="Enter your email address"
-                  className="flex-1 px-4 py-3 border border-input rounded-md bg-background"
+                  className="flex-1 px-4 py-3 border border-input rounded-md bg-background focus:outline-none focus:ring-2 focus:ring-secondary"
                 />
-                <Button className="bg-secondary hover:bg-secondary/90 text-white">Subscribe</Button>
-              </div>
-              <p className="text-xs text-muted-foreground mt-4">We respect your privacy. Unsubscribe at any time.</p>
+                <Button
+                  type="submit"
+                  className="bg-secondary hover:bg-secondary/90 text-white px-6 py-3"
+                >
+                  Subscribe
+                </Button>
+              </form>
+
+              <p className="text-xs text-muted-foreground mt-4">
+                We respect your privacy. Unsubscribe at any time.
+              </p>
             </div>
           </div>
         </section>

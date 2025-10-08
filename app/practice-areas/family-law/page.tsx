@@ -1,4 +1,5 @@
 "use client"
+
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
@@ -78,9 +79,9 @@ export default function FamilyLawPage() {
   ]
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen flex flex-col">
       <Header />
-      <main>
+      <main className="flex-grow">
         {/* Hero Section */}
         <motion.section
           initial={{ opacity: 0 }}
@@ -90,14 +91,12 @@ export default function FamilyLawPage() {
         >
           <div
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-            style={{
-              backgroundImage: `url('/practice-family.jpg')`,
-            }}
+            style={{ backgroundImage: "url('/practice-family.jpg')" }}
           />
-          <div className="absolute inset-0 bg-gradient-to-br from-primary/60 via-primary/50 to-primary/40"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-primary/50 to-primary/30"></div>
 
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div className="max-w-4xl mx-auto text-white">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-white">
+            <div className="max-w-4xl mx-auto">
               <motion.div
                 initial={{ y: 30, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
@@ -107,13 +106,15 @@ export default function FamilyLawPage() {
                 <div className="bg-secondary/20 p-4 rounded-xl">
                   <Heart className="h-12 w-12 text-secondary" />
                 </div>
-                <h1 className="text-4xl md:text-5xl font-serif font-bold text-balance">Family Law</h1>
+                <h1 className="text-4xl md:text-5xl font-serif font-bold text-balance">
+                  Family Law
+                </h1>
               </motion.div>
               <motion.p
                 initial={{ y: 30, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
-                className="text-xl text-blue-100 text-pretty leading-relaxed"
+                className="text-xl text-blue-100 leading-relaxed"
               >
                 Compassionate and experienced family law representation for divorce, custody, support, and all
                 family-related legal matters with a focus on protecting your family's future.
@@ -132,17 +133,16 @@ export default function FamilyLawPage() {
                 viewport={{ once: true }}
                 className="mb-12"
               >
-                <h2 className="text-3xl font-serif font-bold text-primary mb-6">Our Family Law Practice</h2>
+                <h2 className="text-3xl font-serif font-bold text-primary mb-6">
+                  Our Family Law Practice
+                </h2>
                 <p className="text-lg text-muted-foreground leading-relaxed">
-                  Family law matters are deeply personal and emotionally challenging. Our experienced family law team
-                  provides compassionate, strategic representation while protecting your rights and your family's
-                  future. We understand that every family situation is unique and requires personalized attention and
-                  tailored legal solutions.
+                  Family law matters are deeply personal and emotionally challenging. Our experienced team provides
+                  compassionate representation while protecting your rights and your family’s future.
                 </p>
               </motion.div>
 
-              {/* Services Grid */}
-              <div className="grid lg:grid-cols-2 gap-8 mb-16">
+              <div className="grid lg:grid-cols-2 gap-8 mb-16 items-stretch">
                 {services.map((service, index) => (
                   <motion.div
                     key={index}
@@ -150,22 +150,29 @@ export default function FamilyLawPage() {
                     whileInView={{ y: 0, opacity: 1 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, delay: index * 0.1 }}
+                    className="flex"
                   >
-                    <Card className="h-full hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border-l-4 border-l-secondary">
-                      <CardContent className="p-6">
-                        <div className="flex items-start space-x-3 mb-4">
-                          <ArrowRight className="h-5 w-5 text-secondary flex-shrink-0 mt-1" />
-                          <div>
-                            <h3 className="text-xl font-semibold text-primary mb-3">{service.title}</h3>
-                            <p className="text-muted-foreground leading-relaxed mb-4">{service.description}</p>
+                    <Card className="h-full flex flex-col justify-between hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border-l-4 border-l-secondary">
+                      <CardContent className="p-6 flex flex-col justify-between h-full">
+                        <div>
+                          <div className="flex items-start space-x-3 mb-4">
+                            <ArrowRight className="h-5 w-5 text-secondary mt-1" />
+                            <div>
+                              <h3 className="text-xl font-semibold text-primary mb-3">
+                                {service.title}
+                              </h3>
+                              <p className="text-muted-foreground leading-relaxed mb-4">
+                                {service.description}
+                              </p>
+                            </div>
                           </div>
-                        </div>
-                        <div className="ml-8">
-                          <ul className="space-y-2">
-                            {service.details.map((detail, detailIndex) => (
-                              <li key={detailIndex} className="flex items-start space-x-2">
-                                <CheckCircle className="h-4 w-4 text-secondary flex-shrink-0 mt-0.5" />
-                                <span className="text-sm text-muted-foreground">{detail}</span>
+                          <ul className="ml-8 space-y-2">
+                            {service.details.map((detail, i) => (
+                              <li key={i} className="flex items-start space-x-2">
+                                <CheckCircle className="h-4 w-4 text-secondary mt-0.5" />
+                                <span className="text-sm text-muted-foreground">
+                                  {detail}
+                                </span>
                               </li>
                             ))}
                           </ul>
@@ -183,10 +190,12 @@ export default function FamilyLawPage() {
                 viewport={{ once: true }}
                 className="bg-gray-50 rounded-2xl p-8 text-center"
               >
-                <h3 className="text-2xl font-serif font-bold text-primary mb-4">Need Family Law Assistance?</h3>
+                <h3 className="text-2xl font-serif font-bold text-primary mb-4">
+                  Need Family Law Assistance?
+                </h3>
                 <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
                   Family matters require sensitive and experienced legal guidance. Contact us for a confidential
-                  consultation to discuss your family law needs.
+                  consultation today.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <Link href="/contact">
@@ -195,13 +204,15 @@ export default function FamilyLawPage() {
                       Schedule Consultation
                     </Button>
                   </Link>
-                  <Button
-                    variant="outline"
-                    className="border-primary text-primary hover:bg-primary hover:text-white bg-transparent"
-                  >
-                    <Phone className="h-4 w-4 mr-2" />
-                    Call (416) 227-8400
-                  </Button>
+                  <a href="tel:+14162278400">
+                    <Button
+                      variant="outline"
+                      className="border-primary text-primary hover:bg-primary hover:text-white bg-transparent"
+                    >
+                      <Phone className="h-4 w-4 mr-2" />
+                      Call (416) 227-8400
+                    </Button>
+                  </a>
                 </div>
               </motion.div>
             </div>

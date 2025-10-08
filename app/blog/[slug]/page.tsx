@@ -40,27 +40,141 @@ const blogPosts = {
     category: "Family Law",
     readTime: "7 min read",
     content: `
-      <p>When families face separation or divorce, protecting children's interests becomes the paramount concern. The legal system recognizes that children's well-being must be the primary consideration in all family law decisions, but navigating this complex area requires careful planning and expert guidance.</p>
+      <p>When families face separation or divorce, protecting children's interests becomes the paramount concern. The legal system recognizes that children's well-being must be the primary consideration in all family law decisions, but navigating this complex area requires careful planning and expert guidance.</p><br>
       
       <h2>The Best Interests of the Child Standard</h2>
-      <p>Canadian family law is governed by the principle that the best interests of the child must be the primary consideration in all decisions affecting children. This standard encompasses various factors including the child's physical, emotional, and psychological safety, security, and well-being.</p>
+      <p>Canadian family law is governed by the principle that the best interests of the child must be the primary consideration in all decisions affecting children. This standard encompasses various factors including the child's physical, emotional, and psychological safety, security, and well-being.</p><br>
       
       <h2>Custody and Access Arrangements</h2>
-      <p>Modern family law recognizes various custody arrangements, from joint custody to sole custody, each designed to serve the child's best interests. The key is finding an arrangement that provides stability while maintaining meaningful relationships with both parents when appropriate.</p>
+      <p>Modern family law recognizes various custody arrangements, from joint custody to sole custody, each designed to serve the child's best interests. The key is finding an arrangement that provides stability while maintaining meaningful relationships with both parents when appropriate.</p><br>
       
       <h2>Child Support Obligations</h2>
-      <p>Child support is calculated using federal guidelines that consider both parents' incomes and the amount of time the child spends with each parent. Beyond basic support, parents may also be responsible for special or extraordinary expenses such as childcare, medical expenses, and extracurricular activities.</p>
+      <p>Child support is calculated using federal guidelines that consider both parents' incomes and the amount of time the child spends with each parent. Beyond basic support, parents may also be responsible for special or extraordinary expenses such as childcare, medical expenses, and extracurricular activities.</p><br>
       
       <h2>Creating Effective Parenting Plans</h2>
-      <p>A well-crafted parenting plan addresses not only where children will live and when they'll see each parent, but also important decisions about education, healthcare, religion, and extracurricular activities. These plans should be detailed enough to prevent future conflicts while remaining flexible enough to adapt as children grow.</p>
+      <p>A well-crafted parenting plan addresses not only where children will live and when they'll see each parent, but also important decisions about education, healthcare, religion, and extracurricular activities. These plans should be detailed enough to prevent future conflicts while remaining flexible enough to adapt as children grow.</p><br>
       
       <h2>When to Seek Legal Help</h2>
-      <p>Family law matters involving children are emotionally charged and legally complex. Having experienced legal representation ensures that your children's interests are properly protected and that you understand your rights and obligations as a parent.</p>
+      <p>Family law matters involving children are emotionally charged and legally complex. Having experienced legal representation ensures that your children's interests are properly protected and that you understand your rights and obligations as a parent.</p><br>
       
       <p>At Bekwyn Law PC, we understand the sensitive nature of family disputes and work diligently to achieve outcomes that serve your children's best interests while protecting your parental rights.</p>
     `,
   },
-  // Add more blog posts as needed...
+  "estate-planning-why-you-need-will": {
+    title: "Estate Planning: Why You Need a Will",
+    excerpt: "The importance of having a properly drafted will and powers of attorney.",
+    date: "March 5, 2024",
+    author: "Bekwyn Law PC",
+    category: "Estate Planning",
+    readTime: "4 min read",
+    content: `
+      <p>Estate planning is one of the most important steps you can take to protect your loved ones and ensure your wishes are carried out after you're gone. Yet many Canadians delay creating a will, often with costly consequences for their families.</p><br>
+      
+      <h2>Why a Will Matters</h2>
+      <p>A will is more than just a document—it's your voice when you can no longer speak for yourself. Without a will, provincial intestacy laws determine how your assets are distributed, which may not align with your wishes. This can lead to family disputes, unnecessary delays, and additional costs for your loved ones.</p><br>
+      
+      <h2>Key Components of Estate Planning</h2>
+      <p>A comprehensive estate plan includes several important documents. Your will specifies how your assets should be distributed and who should care for minor children. Powers of attorney for property and personal care designate trusted individuals to make decisions on your behalf if you become incapacitated.</p><br>
+      
+      <h2>Protecting Your Family's Future</h2>
+      <p>Estate planning isn't just about distributing assets—it's about minimizing tax implications, avoiding probate complications, and ensuring your family is cared for according to your wishes. A properly structured estate plan can save your beneficiaries thousands of dollars in taxes and legal fees.</p><br>
+      
+      <h2>When to Update Your Will</h2>
+      <p>Life changes require updates to your estate plan. Marriage, divorce, the birth of children, significant asset acquisitions, or the death of a beneficiary are all triggers for reviewing and updating your will and powers of attorney.</p><br>
+      
+      <p>Don't leave your family's future to chance. Contact Bekwyn Law PC today to discuss your estate planning needs and ensure your legacy is protected.</p>
+    `,
+  },
+  "employment-rights-know-your-protections": {
+    title: "Employment Rights: Know Your Protections",
+    excerpt: "Understanding your rights in the workplace and when to seek legal help.",
+    date: "February 28, 2024",
+    author: "Bekwyn Law PC",
+    category: "Employment Law",
+    readTime: "6 min read",
+    content: `
+      <p>Employment law in Canada provides significant protections for workers, but many employees are unaware of their rights until facing a workplace dispute. Understanding these protections is essential for every working Canadian.</p><br>
+      
+      <h2>Your Rights Under Employment Standards</h2>
+      <p>Employment standards legislation establishes minimum requirements for wages, working hours, overtime pay, vacation time, and statutory holidays. These are baseline protections that every employer must provide, regardless of what your employment contract says.</p><br>
+      
+      <h2>Wrongful Dismissal Protection</h2>
+      <p>If you're terminated without cause, you're generally entitled to reasonable notice or pay in lieu of notice. The amount depends on various factors including length of service, age, position, and availability of similar employment. Common law notice often exceeds minimum statutory requirements.</p><br>
+      
+      <h2>Discrimination and Harassment</h2>
+      <p>Human rights legislation prohibits discrimination based on protected grounds such as race, gender, age, disability, and religion. Workplace harassment, whether from supervisors or colleagues, violates these protections and can result in significant liability for employers.</p><br>
+      
+      <h2>Constructive Dismissal</h2>
+      <p>You don't have to be formally fired to have a legal claim. Constructive dismissal occurs when your employer makes fundamental changes to your employment terms without your agreement, such as significant salary reductions, demotions, or hostile work environments.</p><br>
+      
+      <h2>When to Seek Legal Advice</h2>
+      <p>If you're facing termination, have been dismissed, or experiencing workplace harassment or discrimination, consulting an employment lawyer early can significantly impact your outcome. Many situations are time-sensitive, with limitation periods that can bar your claim if you wait too long.</p><br>
+      
+      <p>Bekwyn Law PC has extensive experience protecting employee rights. Contact us for a confidential consultation about your workplace situation.</p>
+    `,
+  },
+  "criminal-defense-rights-during-arrest": {
+    title: "Criminal Defense: Your Rights During Arrest",
+    excerpt: "What you need to know about your rights when facing criminal charges.",
+    date: "February 20, 2024",
+    author: "Bekwyn Law PC",
+    category: "Criminal Law",
+    readTime: "8 min read",
+    content: `
+      <p>Being arrested or charged with a criminal offense is one of the most stressful experiences a person can face. Understanding your rights and taking appropriate action immediately can significantly impact the outcome of your case.</p><br>
+      
+      <h2>Your Charter Rights</h2>
+      <p>The Canadian Charter of Rights and Freedoms guarantees important protections when you're detained or arrested. You have the right to remain silent, the right to be informed of the reasons for your arrest, and the right to retain and instruct counsel without delay. Police must inform you of these rights immediately upon arrest.</p><br>
+      
+      <h2>The Right to Silence</h2>
+      <p>You are not required to answer police questions beyond providing basic identification information. Anything you say can be used as evidence against you. Even seemingly innocent statements can be misinterpreted or taken out of context. Exercise your right to silence until you've consulted with a lawyer.</p><br>
+      
+      <h2>Right to Legal Counsel</h2>
+      <p>Upon arrest, police must provide you with a reasonable opportunity to contact a lawyer. This includes access to duty counsel if you cannot afford a private lawyer. Do not waive this right—legal advice at this critical stage can make the difference between conviction and acquittal.</p><br>
+      
+      <h2>The Importance of Early Legal Representation</h2>
+      <p>The earlier you involve a criminal defense lawyer, the better your chances of a favorable outcome. Early intervention allows your lawyer to preserve evidence, interview witnesses while memories are fresh, identify Charter violations, and develop a strong defense strategy.</p><br>
+      
+      <h2>Common Mistakes to Avoid</h2>
+      <p>Many people inadvertently damage their case by speaking to police without counsel, consenting to searches, or failing to document their arrest circumstances. Others miss important deadlines or fail to comply with bail conditions, creating additional legal problems.</p><br>
+      
+      <h2>Bail Hearings and Release Conditions</h2>
+      <p>After arrest, you may be held for a bail hearing. Having experienced legal representation at your bail hearing is crucial for securing your release and establishing reasonable conditions. Overly restrictive bail conditions can significantly impact your life and your ability to prepare your defense.</p><br>
+      
+      <p>If you've been arrested or charged with a criminal offense, time is of the essence. Contact Bekwyn Law PC immediately for experienced criminal defense representation that protects your rights and your future.</p>
+    `,
+  },
+  "civil-litigation-when-to-consider-legal-action": {
+    title: "Civil Litigation: When to Consider Legal Action",
+    excerpt: "Understanding when civil litigation might be the right path for your dispute.",
+    date: "February 15, 2024",
+    author: "Bekwyn Law PC",
+    category: "Civil Litigation",
+    readTime: "5 min read",
+    content: `
+      <p>Civil litigation can be a powerful tool for resolving disputes and obtaining justice, but it's not always the best solution for every conflict. Understanding when litigation is appropriate—and when alternative approaches might be more effective—is crucial for making informed decisions about your legal matters.</p><br>
+      
+      <h2>What is Civil Litigation?</h2>
+      <p>Civil litigation is the process of resolving disputes between individuals, businesses, or organizations through the court system. Unlike criminal cases, civil litigation typically involves seeking monetary compensation or specific performance rather than criminal penalties.</p><br>
+      
+      <h2>Common Types of Civil Disputes</h2>
+      <p>Civil litigation encompasses a wide range of disputes including breach of contract, personal injury claims, property disputes, professional negligence, defamation, and business conflicts. Each type of case has unique considerations regarding evidence, applicable law, and potential remedies.</p><br>
+      
+      <h2>Factors to Consider Before Litigating</h2>
+      <p>Before pursuing litigation, consider the strength of your case, the amount at stake, the cost of litigation versus potential recovery, and the time commitment required. Litigation can be expensive and time-consuming, so it's essential to have realistic expectations about costs, timelines, and likely outcomes.</p><br>
+      
+      <h2>Alternative Dispute Resolution</h2>
+      <p>Negotiation, mediation, and arbitration can often resolve disputes more quickly and cost-effectively than traditional litigation. These approaches allow parties to maintain greater control over the outcome and can preserve business or personal relationships that litigation might damage.</p><br>
+      
+      <h2>When Litigation Makes Sense</h2>
+      <p>Litigation may be your best option when negotiation has failed, the other party is uncooperative or acting in bad faith, you need court orders for enforcement, or the legal principles at stake have broader implications beyond your specific case.</p><br>
+      
+      <h2>The Litigation Process</h2>
+      <p>Civil litigation typically involves several stages: initial pleadings, discovery of evidence, pre-trial motions, and potentially trial. Most cases settle before trial, but being prepared to go to trial often strengthens your negotiating position.</p><br>
+      
+      <p>If you're involved in a dispute and considering legal action, Bekwyn Law PC can help you evaluate your options and develop a strategic approach that protects your interests while managing costs effectively.</p>
+    `,
+  },
 }
 
 interface BlogPostPageProps {

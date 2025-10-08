@@ -8,7 +8,6 @@ export function TestimonialsSection() {
   const testimonials = [
     {
       name: "Sarah Johnson",
-      role: "Immigration Client",
       content:
         "Bekwyn Law helped me navigate the complex immigration process with such care and expertise. They made what seemed impossible, possible. I'm now a proud Canadian resident thanks to their dedication.",
       rating: 5,
@@ -16,7 +15,6 @@ export function TestimonialsSection() {
     },
     {
       name: "Onyebuchi Nmadi",
-      role: "Family Law Client",
       content:
         "During one of the most difficult times in my life, the team at Bekwyn Law provided compassionate and effective legal support. They fought for my children's best interests and achieved an outcome I never thought possible.",
       rating: 5,
@@ -24,7 +22,6 @@ export function TestimonialsSection() {
     },
     {
       name: "Emily Rodriguez",
-      role: "Estate Planning Client",
       content:
         "The estate planning services were thorough and professional. They explained everything clearly and ensured my family's future is secure. I highly recommend their services to anyone needing legal assistance.",
       rating: 5,
@@ -48,7 +45,8 @@ export function TestimonialsSection() {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* ✅ Equal-height responsive cards */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
           {testimonials.map((testimonial, index) => (
             <motion.div
               key={index}
@@ -56,29 +54,35 @@ export function TestimonialsSection() {
               whileInView={{ y: 0, opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.2 }}
+              className="flex"
             >
-              <Card className="h-full hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-l-4 border-l-secondary">
-                <CardContent className="p-6">
-                  <div className="flex items-center mb-4">
-                    <Quote className="h-8 w-8 text-secondary/30 mr-2" />
-                    <div className="flex">
-                      {[...Array(testimonial.rating)].map((_, i) => (
-                        <Star key={i} className="h-4 w-4 fill-secondary text-secondary" />
-                      ))}
+              <Card className="flex flex-col justify-between w-full hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-l-4 border-l-secondary">
+                <CardContent className="p-6 flex flex-col flex-1">
+                  {/* Quote + Stars */}
+                  <div>
+                    <div className="flex items-center mb-4">
+                      <Quote className="h-8 w-8 text-secondary/30 mr-2 flex-shrink-0" />
+                      <div className="flex">
+                        {[...Array(testimonial.rating)].map((_, i) => (
+                          <Star key={i} className="h-4 w-4 fill-secondary text-secondary" />
+                        ))}
+                      </div>
                     </div>
+
+                    <p className="text-muted-foreground mb-6 leading-relaxed italic line-clamp-6">
+                      "{testimonial.content}"
+                    </p>
                   </div>
 
-                  <p className="text-muted-foreground mb-6 leading-relaxed italic">"{testimonial.content}"</p>
-
-                  <div className="flex items-center">
+                  {/* Avatar + Name */}
+                  <div className="flex items-center mt-auto pt-4 border-t border-gray-100">
                     <img
                       src={testimonial.image || "/placeholder.svg"}
                       alt={testimonial.name}
-                      className="w-12 h-12 rounded-full mr-4 object-cover"
+                      className="w-12 h-12 rounded-full mr-4 object-cover flex-shrink-0"
                     />
-                    <div>
-                      <h4 className="font-semibold text-primary">{testimonial.name}</h4>
-                      <p className="text-sm text-muted-foreground">{testimonial.role}</p>
+                    <div className="min-w-0">
+                      <h4 className="font-semibold text-primary truncate">{testimonial.name}</h4>
                     </div>
                   </div>
                 </CardContent>

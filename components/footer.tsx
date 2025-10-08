@@ -88,9 +88,9 @@ export function Footer() {
                   Contact
                 </a>
               </li>
-              <li>
+              {/* <li>
                 <span className="text-sm text-accent font-medium">Free Consultation</span>
-              </li>
+              </li> */}
             </ul>
           </div>
         </div>
