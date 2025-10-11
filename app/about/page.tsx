@@ -87,12 +87,12 @@ export default function AboutPage() {
                 {
                   icon: Users,
                   title: "Client-Focused",
-                  text: "Personalized attention, open communication, and tailored solutions for each client’s unique situation.",
+                  text: "Personalized attention, open communication, and tailored solutions for each client's unique situation.",
                 },
                 {
                   icon: Award,
                   title: "Proven Results",
-                  text: "A strong record of successful outcomes and satisfied clients across Ontario’s diverse legal landscape.",
+                  text: "A strong record of successful outcomes and satisfied clients across Ontario's diverse legal landscape.",
                 },
                 {
                   icon: Clock,
@@ -127,7 +127,7 @@ export default function AboutPage() {
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 items-stretch">
+            <div className="grid md:grid-cols-2 gap-8 items-stretch max-w-3xl mx-auto">
               {[
                 {
                   name: "Sophie Ibekwe",
@@ -138,62 +138,27 @@ export default function AboutPage() {
                   name: "Kingsley Ibekwe",
                   role: "Immigration Lead",
                   details: [
-                    "MSc, ACIT, CPA (Ireland)",
-                    "RCIC-IRB",
+                    "RCIC-IRB, MSc, ACIT, CPA (Ireland)",
                     "Commissioner for Taking Affidavits",
                     "Province of Ontario",
                   ],
                 },
-                {
-                  name: "Team Member",
-                  role: "Position Title",
-                  details: ["Qualifications", "Coming Soon"],
-                  placeholder: true,
-                },
-                {
-                  name: "Team Member",
-                  role: "Position Title",
-                  details: ["Qualifications", "Coming Soon"],
-                  placeholder: true,
-                },
               ].map((member, i) => (
                 <Card
                   key={i}
-                  className={`text-center flex flex-col justify-between hover:shadow-lg transition-shadow duration-300 ${
-                    member.placeholder ? "opacity-50" : ""
-                  }`}
+                  className="text-center flex flex-col justify-between hover:shadow-lg transition-shadow duration-300"
                 >
                   <CardContent className="p-6 flex flex-col flex-1">
-                    <div
-                      className={`${
-                        member.placeholder ? "bg-gray-100" : "bg-primary/10"
-                      } w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4`}
-                    >
-                      <User
-                        className={`h-10 w-10 ${
-                          member.placeholder ? "text-gray-400" : "text-primary"
-                        }`}
-                      />
+                    <div className="bg-primary/10 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <User className="h-10 w-10 text-primary" />
                     </div>
-                    <h3
-                      className={`text-xl font-semibold mb-2 ${
-                        member.placeholder ? "text-gray-400" : "text-primary"
-                      }`}
-                    >
+                    <h3 className="text-xl font-semibold mb-2 text-primary">
                       {member.name}
                     </h3>
-                    <p
-                      className={`text-sm font-medium mb-3 ${
-                        member.placeholder ? "text-gray-400" : "text-secondary"
-                      }`}
-                    >
+                    <p className="text-sm font-medium mb-3 text-secondary">
                       {member.role}
                     </p>
-                    <div
-                      className={`text-xs space-y-1 leading-relaxed ${
-                        member.placeholder ? "text-gray-400" : "text-muted-foreground"
-                      }`}
-                    >
+                    <div className="text-xs space-y-1 leading-relaxed text-muted-foreground">
                       {member.details.map((line, j) => (
                         <p key={j}>{line}</p>
                       ))}
