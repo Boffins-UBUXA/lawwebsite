@@ -252,12 +252,14 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
                   <Link href="/contact">
                     <Button className="bg-secondary hover:bg-secondary/90 text-white">Schedule Consultation</Button>
                   </Link>
+                  <a href="tel:+14162278400">
                   <Button
                     variant="outline"
                     className="border-primary text-primary hover:bg-primary hover:text-white bg-transparent"
                   >
-                    Call (416) 227-8400
+                    Call +1 (289) 838-2982
                   </Button>
+                  </a>
                 </div>
               </div>
             </div>

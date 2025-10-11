@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Phone, Mail, MapPin, Clock, Send } from "lucide-react"
+import Link from "next/link"
 
 export default function ContactPage() {
   return (
@@ -187,7 +188,7 @@ export default function ContactPage() {
                 variant="outline"
                 className="border-secondary text-secondary hover:bg-secondary hover:text-white bg-transparent"
               >
-                Learn About Legal Aid Eligibility
+                <Link href="/legal-aid">Learn About Legal Aid Eligibility</Link>
               </Button>
             </div>
           </div>

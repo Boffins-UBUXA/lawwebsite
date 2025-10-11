@@ -179,13 +179,15 @@ export default function PracticeAreasPage() {
                     Schedule Consultation
                   </motion.button>
                 </Link>
+                <a href="tel:+14162278400">
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="border-2 border-primary text-primary hover:bg-primary hover:text-white px-8 py-3 rounded-lg font-semibold transition-all bg-transparent"
                 >
-                  Call (416) 227-8400
+                  Call +1 (289) 838-2982
                 </motion.button>
+                </a>
               </div>
             </div>
           </div>
