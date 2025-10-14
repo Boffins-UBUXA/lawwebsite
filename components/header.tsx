@@ -57,7 +57,7 @@ export function Header() {
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
             <Link href="/" className="flex items-center space-x-3">
-              <div className="shadow-[2px_2px_var(--primary)] rounded-lg">
+              <div className="shadow-[2px_2px_7px_var(--primary)] rounded-lg">
                 <img
                   src="/goldonly-removebg-preview.png"
                   alt="logo"
