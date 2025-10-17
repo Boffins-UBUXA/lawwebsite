@@ -49,7 +49,6 @@ export default function ContactPage() {
                         <div>
                           <h3 className="font-semibold text-primary mb-2">Phone Numbers</h3>
                           <p className="text-muted-foreground">+1 (289) 838 2982</p>
-                          <p className="text-muted-foreground">+1 (289) 838 2982</p>
                         </div>
                       </div>
                     </CardContent>
@@ -78,9 +77,9 @@ export default function ContactPage() {
                         <div>
                           <h3 className="font-semibold text-primary mb-2">Location</h3>
                           <p className="text-muted-foreground">
-                            Serving clients across Ontario
+                            Serving clients across Burlington,
                             <br />
-                            Toronto, Ontario, Canada
+                            Ontario and beyond
                           </p>
                         </div>
                       </div>
