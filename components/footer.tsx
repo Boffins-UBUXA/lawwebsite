@@ -1,14 +1,49 @@
-import { Scale, Phone, Mail, MapPin } from "lucide-react"
+"use client"
+
+import Link from "next/link"
+import { Phone, Mail, MapPin } from "lucide-react"
+import { useSiteSettings } from "@/contexts/site-settings-context"
 
 export function Footer() {
-  const practiceAreas = [
-    "Immigration & Refugee Law",
-    "Family Law",
-    "Criminal Law",
-    "Wills & Powers of Attorney",
-    "Employment & Human Rights",
-    "Civil Litigation & Tenancy",
-  ]
+  const { settings, loading } = useSiteSettings()
+
+  if (loading) {
+    return (
+      <footer className="bg-primary text-primary-foreground">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 text-center">
+          Loading...
+        </div>
+      </footer>
+    )
+  }
+
+  if (!settings || !settings.footer) {
+    return null
+  }
+
+  const { footer } = settings
+
+  // Helper to get icon component
+  const getIconForType = (type: string) => {
+    switch (type) {
+      case 'phone':
+        return Phone
+      case 'email':
+        return Mail
+      case 'location':
+        return MapPin
+      default:
+        return Phone
+    }
+  }
+
+  // Separate footer links into practice areas and quick links
+  const practiceAreaLinks = footer.FooterLinks.filter(link => 
+    link.url.includes('/practice-areas')
+  )
+  const otherLinks = footer.FooterLinks.filter(link => 
+    !link.url.includes('/practice-areas')
+  )
 
   return (
     <footer className="bg-primary text-primary-foreground">
@@ -17,88 +52,80 @@ export function Footer() {
           {/* Logo and Description */}
           <div className="lg:col-span-2">
             <div className="flex items-center space-x-2 mb-4">
-              {/* <Scale className="h-8 w-8 text-accent" /> */}
               <div className="shadow-[2px_2px_7px_#ccc] rounded-lg">
-              <img src="/goldonly-removebg-preview.png"
-                  alt="logo" className="h-16 w-16 rounded-lg" />
-                  </div>
-              <div className="text-2xl font-serif font-bold">Bekwyn Law PC</div>
+                <img 
+                  src={footer.logo?.url || "/goldonly-removebg-preview.png"}
+                  alt={footer.logoAlt || footer.companyName} 
+                  className="h-16 w-16 rounded-lg object-cover" 
+                />
+              </div>
+              <div className="text-2xl font-serif font-bold">{footer.companyName}</div>
             </div>
             <p className="text-primary-foreground/80 mb-6 text-pretty">
-              At Bekwyn Law, we believe that law is about people, not just paperwork. We proudly serve individuals,
-              families, and businesses with practical, compassionate, and results-driven legal support.
+              {footer.companyTagline}
             </p>
             <div className="space-y-2">
-              <div className="flex items-center space-x-2">
-                <Phone className="h-4 w-4 text-accent" />
-                <span className="text-sm">[+1 (289) 838-2982]</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Mail className="h-4 w-4 text-accent" />
-                <span className="text-sm">[info@bekwynlaw.com]</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <MapPin className="h-4 w-4 text-accent" />
-                <span className="text-sm">Bekwyn law head office Ontario, Canada</span>
-              </div>
+              {footer.ContactDetails.map((contact) => {
+                const Icon = getIconForType(contact.type)
+                return (
+                  <div key={contact.id} className="flex items-center space-x-2">
+                    <Icon className="h-4 w-4 text-accent" />
+                    {contact.href ? (
+                      <a href={contact.href} className="text-sm hover:text-accent transition-colors">
+                        {contact.value}
+                      </a>
+                    ) : (
+                      <span className="text-sm">{contact.value}</span>
+                    )}
+                  </div>
+                )
+              })}
             </div>
           </div>
 
           {/* Practice Areas */}
-          <div>
-            <h3 className="text-lg font-serif font-bold mb-4">Practice Areas</h3>
-            <ul className="space-y-2">
-              {practiceAreas.map((area, index) => (
-                <li key={index}>
-                  <a
-                    href="#practice-areas"
-                    className="text-sm text-primary-foreground/80 hover:text-accent transition-colors"
-                  >
-                    {area}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {practiceAreaLinks.length > 0 && (
+            <div>
+              <h3 className="text-lg font-serif font-bold mb-4">Practice Areas</h3>
+              <ul className="space-y-2">
+                {practiceAreaLinks.map((link) => (
+                  <li key={link.id}>
+                    <Link
+                      href={link.url}
+                      className="text-sm text-primary-foreground/80 hover:text-accent transition-colors"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
 
           {/* Quick Links */}
-          <div>
-            <h3 className="text-lg font-serif font-bold mb-4">Quick Links</h3>
-            <ul className="space-y-2">
-              <li>
-                <a href="#home" className="text-sm text-primary-foreground/80 hover:text-accent transition-colors">
-                  Home
-                </a>
-              </li>
-              <li>
-                <a href="#about" className="text-sm text-primary-foreground/80 hover:text-accent transition-colors">
-                  About Us
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#practice-areas"
-                  className="text-sm text-primary-foreground/80 hover:text-accent transition-colors"
-                >
-                  Services
-                </a>
-              </li>
-              <li>
-                <a href="#contact" className="text-sm text-primary-foreground/80 hover:text-accent transition-colors">
-                  Contact
-                </a>
-              </li>
-              {/* <li>
-                <span className="text-sm text-accent font-medium">Free Consultation</span>
-              </li> */}
-            </ul>
-          </div>
+          {otherLinks.length > 0 && (
+            <div>
+              <h3 className="text-lg font-serif font-bold mb-4">Quick Links</h3>
+              <ul className="space-y-2">
+                {otherLinks.map((link) => (
+                  <li key={link.id}>
+                    <Link
+                      href={link.url}
+                      className="text-sm text-primary-foreground/80 hover:text-accent transition-colors"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
 
         <div className="border-t border-primary-foreground/20 mt-8 pt-8 text-center">
-        <p className="text-sm text-primary-foreground/60">
-           © {new Date().getFullYear()} Bekwyn Law PC. All rights reserved. | Professional legal services in Ontario
-        </p>
+          <p className="text-sm text-primary-foreground/60">
+            {footer.FooterCopyright}
+          </p>
         </div>
       </div>
     </footer>
