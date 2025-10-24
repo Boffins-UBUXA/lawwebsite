@@ -7,6 +7,7 @@ import { Card } from "@/components/ui/card"
 import { Users, Heart, Shield, FileText, Briefcase, Scale, Loader2 } from "lucide-react"
 import { motion } from "framer-motion"
 import { getLawPracticeAreas, getImageUrl, type PracticeArea } from "@/lib/api/law-practice-areas"
+import { getLawPracticeAreasPage, type PracticeAreasPageContent } from "@/lib/api/law-practice-areas-page"
 
 // Icon mapping based on icon name from API
 const iconMap: Record<string, any> = {
@@ -18,8 +19,18 @@ const iconMap: Record<string, any> = {
   scale: Scale,
 }
 
+function parseNumericId(value: unknown): number | null {
+  if (typeof value === "number" && Number.isFinite(value)) return value
+  if (typeof value === "string") {
+    const parsed = Number.parseInt(value, 10)
+    if (!Number.isNaN(parsed)) return parsed
+  }
+  return null
+}
+
 export default function PracticeAreasPage() {
   const [practiceAreas, setPracticeAreas] = useState<PracticeArea[]>([])
+  const [pageContent, setPageContent] = useState<PracticeAreasPageContent | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
@@ -27,8 +38,62 @@ export default function PracticeAreasPage() {
     const fetchPracticeAreas = async () => {
       try {
         setLoading(true)
-        const data = await getLawPracticeAreas()
-        setPracticeAreas(data)
+        const [pageData, allPracticeAreas] = await Promise.all([
+          getLawPracticeAreasPage(),
+          getLawPracticeAreas(),
+        ])
+        setPageContent(pageData)
+
+        if (pageData) {
+          const refs = Array.isArray(pageData.practiceAreaRefs) ? pageData.practiceAreaRefs : []
+
+          if (refs.length > 0) {
+            const byId = new Map(
+              allPracticeAreas
+                .map((area) => [parseNumericId(area.id), area] as const)
+                .filter(([key]) => key !== null)
+            )
+            const byDocumentId = new Map(
+              allPracticeAreas
+                .filter((area) => area.documentId)
+                .map((area) => [(area.documentId as string).toLowerCase(), area])
+            )
+            const bySlug = new Map(
+              allPracticeAreas
+                .filter((area) => area.slug)
+                .map((area) => [area.slug.toLowerCase(), area])
+            )
+
+            const ordered = refs
+              .map((ref) => {
+                const refId = parseNumericId(ref.id)
+                if (refId !== null && byId.has(refId)) return byId.get(refId)
+
+                const refDocumentId = ref.documentId?.toLowerCase()
+                if (refDocumentId && byDocumentId.has(refDocumentId)) return byDocumentId.get(refDocumentId)
+
+                const refSlug = ref.slug?.toLowerCase()
+                if (refSlug && bySlug.has(refSlug)) return bySlug.get(refSlug)
+
+                return undefined
+              })
+              .filter((area): area is PracticeArea => Boolean(area))
+
+            if (ordered.length > 0) {
+              setPracticeAreas(ordered)
+            } else if (pageData.practiceAreas.length > 0) {
+              setPracticeAreas(pageData.practiceAreas)
+            } else {
+              setPracticeAreas([])
+            }
+          } else if (pageData.practiceAreas.length > 0) {
+            setPracticeAreas(pageData.practiceAreas)
+          } else {
+            setPracticeAreas([])
+          }
+        } else {
+          setPracticeAreas(allPracticeAreas)
+        }
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Failed to load practice areas')
       } finally {
@@ -105,7 +170,7 @@ export default function PracticeAreasPage() {
                 transition={{ duration: 0.8, delay: 0.2 }}
                 className="text-4xl md:text-5xl font-serif font-bold mb-6 text-balance"
               >
-                Areas of Practice
+                {pageContent?.heroTitle || "Areas of Practice"}
               </motion.h1>
               <motion.p
                 initial={{ y: 30, opacity: 0 }}
@@ -113,7 +178,8 @@ export default function PracticeAreasPage() {
                 transition={{ duration: 0.8, delay: 0.4 }}
                 className="text-xl text-blue-100 text-pretty"
               >
-                Comprehensive legal services across multiple practice areas to meet all your legal needs
+                {pageContent?.heroSubtitle ||
+                  "Comprehensive legal services across multiple practice areas to meet all your legal needs"}
               </motion.p>
             </div>
           </div>

@@ -15,6 +15,10 @@ export interface ContactCard {
   title: string
   value?: string
   href?: string
+  lines?: Array<{
+    id: number
+    text: string
+  }>
 }
 
 export interface ContactInfoSection {
@@ -31,6 +35,11 @@ export interface FormField {
   fieldType: string
   placeholder: string
   required: boolean
+  options?: Array<{
+    id: number
+    label: string
+    value: string
+  }>
 }
 
 export interface ContactPoint {

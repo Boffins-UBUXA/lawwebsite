@@ -20,8 +20,9 @@ const defaultImages: Record<string, string> = {
 };
 
 export function TestimonialsSection({ data, testimonials }: TestimonialsSectionProps) {
-  // Use testimonials from API if available, otherwise fallback to data from home page section
-  const displayTestimonials = testimonials.length > 0 ? testimonials : data.testimonials;
+  // Prefer curated testimonials from the home page section; fall back to API catalog if empty
+  const displayTestimonials =
+    (data.testimonials && data.testimonials.length > 0 ? data.testimonials : testimonials) ?? [];
 
   return (
     <section className="py-16 bg-gray-50">
@@ -49,7 +50,8 @@ export function TestimonialsSection({ data, testimonials }: TestimonialsSectionP
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
             {displayTestimonials.map((testimonial, index) => {
               const cleanQuote = stripHtml(testimonial.quote);
-              const image = defaultImages[testimonial.name] || "/placeholder.svg";
+              const image = testimonial.photo?.url || defaultImages[testimonial.name] || "/placeholder.svg";
+              const imageAlt = testimonial.photo?.alt || testimonial.name;
 
               return (
                 <motion.div
@@ -82,7 +84,7 @@ export function TestimonialsSection({ data, testimonials }: TestimonialsSectionP
                       <div className="flex items-center mt-auto pt-4 border-t border-gray-100">
                         <img
                           src={image}
-                          alt={testimonial.name}
+                          alt={imageAlt}
                           className="w-12 h-12 rounded-full mr-4 object-cover flex-shrink-0"
                         />
                         <div className="min-w-0">

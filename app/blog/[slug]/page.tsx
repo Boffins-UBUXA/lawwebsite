@@ -1,3 +1,4 @@
+import Image from "next/image"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
@@ -5,6 +6,7 @@ import { Calendar, User, ArrowLeft, Clock } from "lucide-react"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import { getLawBlogPost, getLawBlogPosts } from "@/lib/api/law-blog-posts"
+import { cn } from "@/lib/utils"
 
 interface BlogPostPageProps {
   params: {
@@ -44,7 +46,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
               <h1 className="text-4xl md:text-5xl font-serif font-bold mb-6 text-balance">{post.title}</h1>
 
-              <div className="flex items-center space-x-6 text-blue-100">
+              <div className="flex flex-wrap items-center gap-4 text-blue-100">
                 <div className="flex items-center space-x-2">
                   <Calendar className="h-4 w-4" />
                   <span>{new Date(post.publishedDate).toLocaleDateString()}</span>
@@ -58,6 +60,19 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   <span>{post.readTime}</span>
                 </div>
               </div>
+
+              {post.heroImage && (
+                <div className="mt-10 overflow-hidden rounded-2xl shadow-2xl ring-1 ring-white/10">
+                  <Image
+                    src={post.heroImage.url}
+                    alt={post.heroImage.alt ?? post.title}
+                    width={post.heroImage.width ?? 1280}
+                    height={post.heroImage.height ?? 720}
+                    className="h-auto w-full object-cover"
+                    priority
+                  />
+                </div>
+              )}
             </div>
           </div>
         </section>
@@ -71,23 +86,21 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
               <article className="bg-white rounded-2xl shadow-xl p-6 sm:p-8 md:p-12 lg:p-16">
                 <div
-                  className="article-content
-                    prose prose-base sm:prose-lg max-w-none
-                    prose-headings:font-serif prose-headings:text-primary prose-headings:mb-4 sm:prose-headings:mb-6 prose-headings:mt-8 sm:prose-headings:mt-12 first:prose-headings:mt-0
-                    prose-h2:text-2xl sm:prose-h2:text-3xl prose-h2:font-bold prose-h2:border-b prose-h2:border-gray-200 prose-h2:pb-2 sm:prose-h2:pb-3 prose-h2:break-words
-                    prose-h3:text-xl sm:prose-h3:text-2xl prose-h3:font-semibold prose-h3:break-words
-                    prose-p:text-gray-700 prose-p:leading-relaxed prose-p:mb-4 sm:prose-p:mb-6 prose-p:text-justify
-                    prose-p:font-light prose-p:tracking-wide prose-p:break-words prose-p:hyphens-auto
-                    prose-a:text-secondary prose-a:font-medium prose-a:no-underline hover:prose-a:underline hover:prose-a:text-secondary/80 prose-a:break-words
-                    prose-strong:text-primary prose-strong:font-semibold prose-strong:break-words
-                    prose-ul:my-4 sm:prose-ul:my-6 prose-ul:pl-6 prose-li:text-gray-700 prose-li:leading-relaxed prose-li:mb-2
-                    prose-ol:my-4 sm:prose-ol:my-6 prose-ol:pl-6
-                    prose-blockquote:border-l-4 prose-blockquote:border-secondary prose-blockquote:pl-4 prose-blockquote:italic prose-blockquote:text-gray-600
-                    prose-img:rounded-lg prose-img:shadow-md prose-img:my-8 prose-img:w-full
-                    prose-code:bg-gray-100 prose-code:px-2 prose-code:py-1 prose-code:rounded prose-code:text-sm prose-code:break-words
-                    prose-pre:bg-gray-900 prose-pre:text-gray-100 prose-pre:p-4 prose-pre:rounded-lg prose-pre:overflow-x-auto
-                    first-letter:text-4xl sm:first-letter:text-5xl first-letter:font-serif first-letter:font-bold first-letter:text-primary first-letter:float-left first-letter:mr-2 sm:first-letter:mr-3 first-letter:leading-none first-letter:mt-1
-                    [&>*:first-child]:first-letter:text-4xl [&>*:first-child]:sm:first-letter:text-5xl"
+                  className={cn(
+                    "prose prose-base sm:prose-lg max-w-none",
+                    "prose-headings:font-serif prose-headings:text-primary prose-headings:mb-4 sm:prose-headings:mb-6",
+                    "prose-h2:text-2xl sm:prose-h2:text-3xl prose-h2:font-bold prose-h2:border-b prose-h2:border-gray-200 prose-h2:pb-2 sm:prose-h2:pb-3",
+                    "prose-h3:text-xl sm:prose-h3:text-2xl prose-h3:font-semibold",
+                    "prose-p:text-gray-700 prose-p:leading-[1.9] prose-p:my-6 sm:prose-p:my-8",
+                    "prose-a:text-secondary prose-a:font-medium prose-a:no-underline hover:prose-a:underline hover:prose-a:text-secondary/80",
+                    "prose-strong:text-primary",
+                    "prose-ul:my-6 sm:prose-ul:my-8 prose-ol:my-6 sm:prose-ol:my-8 prose-li:leading-relaxed",
+                    "prose-blockquote:border-l-4 prose-blockquote:border-secondary prose-blockquote:pl-4 prose-blockquote:italic prose-blockquote:text-gray-600",
+                    "prose-img:rounded-lg prose-img:shadow-md prose-img:my-8 prose-img:w-full",
+                    "prose-code:bg-gray-100 prose-code:px-2 prose-code:py-1 prose-code:rounded",
+                    "prose-pre:bg-gray-900 prose-pre:text-gray-100 prose-pre:p-4 prose-pre:rounded-lg prose-pre:overflow-x-auto",
+                    "first-letter:text-4xl sm:first-letter:text-5xl first-letter:font-serif first-letter:font-bold first-letter:text-primary first-letter:leading-none first-letter:mr-2 sm:first-letter:mr-3 first-letter:mt-1"
+                  )}
                   dangerouslySetInnerHTML={{ __html: post.content }}
                 />
               </article>

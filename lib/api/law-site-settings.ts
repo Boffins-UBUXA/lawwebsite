@@ -37,10 +37,10 @@ export interface Contact {
     href: string | null;
   }
   
-  export interface LawSiteSettings {
-    id: number;
-    documentId: string;
-    brandName: string;
+export interface LawSiteSettings {
+  id: number;
+  documentId: string;
+  brandName: string;
     tagline: string;
     footerNote: string;
     logo: any;
@@ -57,17 +57,70 @@ export interface Contact {
       FooterLinks: NavigationItem[];
       ContactDetails: FooterContactDetail[];
     };
-    seo: any;
+  seo: any;
+}
+
+const STRAPI_URL = (process.env.NEXT_PUBLIC_STRAPI_URL || 'https://cms.coming2canada.ca').replace(/\/$/, '');
+const STRAPI_TOKEN = process.env.NEXT_PUBLIC_STRAPI_TOKEN;
+
+function toAbsoluteUrl(url?: string | null): string | undefined {
+  if (!url) return undefined;
+  return url.startsWith('http') ? url : `${STRAPI_URL}${url}`;
+}
+
+type MediaLike = {
+  url?: string | null;
+  formats?: Record<string, { url?: string | null }> | null;
+};
+
+function enhanceMedia<T extends MediaLike | null | undefined>(media: T): T {
+  if (!media) return media;
+  const enhanced: MediaLike = { ...media, url: toAbsoluteUrl(media.url) };
+  if (media.formats) {
+    enhanced.formats = Object.fromEntries(
+      Object.entries(media.formats).map(([key, value]) => [
+        key,
+        { ...value, url: toAbsoluteUrl(value?.url || undefined) },
+      ]),
+    );
   }
-  
-  const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL || 'https://cms.coming2canada.ca';
-  const STRAPI_TOKEN = process.env.NEXT_PUBLIC_STRAPI_TOKEN;
-  
-  export async function getLawSiteSettings(): Promise<LawSiteSettings | null> {
-    try {
-      // Build proper populate query for nested relations
-      const populate = [
-        'logo',
+  return enhanced as T;
+}
+
+function enhanceNavigationMedia(entry: any) {
+  if (!entry) return entry;
+  const next: any = { ...entry };
+
+  if (next.image) {
+    if (typeof next.image === 'string') {
+      next.image = toAbsoluteUrl(next.image);
+    } else {
+      next.image = enhanceMedia(next.image)?.url ?? null;
+    }
+  }
+
+  if (Array.isArray(next.dropdown)) {
+    next.dropdown = next.dropdown.map((item: any) => {
+      if (!item) return item;
+      const dropdownItem: any = { ...item };
+      if (dropdownItem.image) {
+        dropdownItem.image =
+          typeof dropdownItem.image === 'string'
+            ? toAbsoluteUrl(dropdownItem.image)
+            : enhanceMedia(dropdownItem.image)?.url ?? null;
+      }
+      return dropdownItem;
+    });
+  }
+
+  return next;
+}
+
+export async function getLawSiteSettings(): Promise<LawSiteSettings | null> {
+  try {
+    // Build proper populate query for nested relations
+    const populate = [
+      'logo',
         'topContacts',
         'socialLinks',
         'navigation',
@@ -94,7 +147,24 @@ export interface Contact {
       }
   
       const result = await response.json();
-      return result.data;
+      const data = result.data;
+
+      if (data) {
+        data.logo = enhanceMedia(data.logo);
+
+        if (Array.isArray(data.navigation)) {
+          data.navigation = data.navigation.map((item: any) => enhanceNavigationMedia(item));
+        }
+
+        if (data.footer) {
+          data.footer.logo = enhanceMedia(data.footer.logo);
+          if (Array.isArray(data.footer.FooterLinks)) {
+            data.footer.FooterLinks = data.footer.FooterLinks.map((item: any) => enhanceNavigationMedia(item));
+          }
+        }
+      }
+
+      return data;
     } catch (error) {
       console.error('Error fetching law site settings:', error);
       return null;

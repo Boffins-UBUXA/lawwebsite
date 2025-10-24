@@ -6,7 +6,6 @@ import { TestimonialsSection } from "@/components/testimonials-section"
 import { ContactSection } from "@/components/contact-section"
 import { Footer } from "@/components/footer"
 import { getLawHomePage, getSection } from "@/lib/api/law-home-page"
-import { getLawTestimonials } from "@/lib/api/law-testimonials"
 import type { 
   HeroBlock, 
   PracticeSection, 
@@ -18,10 +17,7 @@ import type {
 
 export default async function HomePage() {
   // Fetch data from Strapi
-  const [homePageData, testimonials] = await Promise.all([
-    getLawHomePage(),
-    getLawTestimonials()
-  ]);
+  const homePageData = await getLawHomePage();
 
   if (!homePageData) {
     return (
@@ -57,7 +53,7 @@ export default async function HomePage() {
         {testimonialsSection && (
           <TestimonialsSection 
             data={testimonialsSection} 
-            testimonials={testimonials}
+            testimonials={[]}
           />
         )}
         {contactSection && <ContactSection data={contactSection} />}

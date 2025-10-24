@@ -77,17 +77,24 @@ export default async function ContactPage() {
                               </div>
                               <div>
                                 <h3 className="font-semibold text-primary mb-2">{card.title}</h3>
-                                {card.value && (
-                                  <p className="text-muted-foreground">
-                                    {card.href ? (
-                                      <a href={card.href} className="hover:text-secondary transition-colors">
-                                        {card.value}
-                                      </a>
-                                    ) : (
-                                      card.value
-                                    )}
-                                  </p>
-                                )}
+                                <div className="space-y-1">
+                                  {card.value ? (
+                                    <p className="text-muted-foreground">
+                                      {card.href ? (
+                                        <a href={card.href} className="hover:text-secondary transition-colors">
+                                          {card.value}
+                                        </a>
+                                      ) : (
+                                        card.value
+                                      )}
+                                    </p>
+                                  ) : null}
+                                  {card.lines?.map((line) => (
+                                    <p key={line.id} className="text-muted-foreground">
+                                      {line.text}
+                                    </p>
+                                  ))}
+                                </div>
                               </div>
                             </div>
                           </CardContent>
@@ -126,13 +133,11 @@ export default async function ContactPage() {
                                 </label>
                                 <select className="w-full p-3 border border-input rounded-md bg-background">
                                   <option value="">{field.placeholder}</option>
-                                  <option value="immigration">Immigration & Refugee Law</option>
-                                  <option value="family">Family Law</option>
-                                  <option value="criminal">Criminal Law</option>
-                                  <option value="wills">Wills & Powers of Attorney</option>
-                                  <option value="employment">Employment & Human Rights</option>
-                                  <option value="civil">Civil Litigation</option>
-                                  <option value="other">Other</option>
+                                  {(field.options ?? []).map((option) => (
+                                    <option key={option.id} value={option.value}>
+                                      {option.label}
+                                    </option>
+                                  ))}
                                 </select>
                               </div>
                             )
