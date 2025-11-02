@@ -57,7 +57,7 @@ export function ContactSection({ data }: ContactSectionProps) {
                       ) : (
                         <p className="font-medium text-foreground">{contact.value}</p>
                       )}
-                      <p className="text-sm text-muted-foreground">{contact.label}</p>
+                      <p className="text-sm text-muted-foreground cursor-pointer">{contact.label}</p>
                     </div>
                   </div>
                 );

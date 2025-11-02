@@ -79,7 +79,7 @@ export default async function BlogPage() {
                     <Link href={`/blog/${post.slug}`} className="mt-6">
                       <Button
                         variant="ghost"
-                        className="w-full text-secondary hover:bg-secondary hover:text-white group-hover:bg-secondary group-hover:text-white transition-all justify-between"
+                        className="w-full text-secondary hover:bg-secondary hover:text-white group-hover:bg-secondary group-hover:text-white transition-all justify-between cursor-pointer"
                       >
                         Read More
                         <ArrowRight className="h-4 w-4" />
@@ -108,7 +108,7 @@ export default async function BlogPage() {
                   placeholder={newsletter.emailPlaceholder}
                   className="flex-1 px-4 py-3 border border-input rounded-md bg-background focus:outline-none focus:ring-2 focus:ring-secondary"
                 />
-                <Button type="submit" className="bg-secondary hover:bg-secondary/90 text-white px-6 py-3">
+                <Button type="submit" className="bg-secondary hover:bg-secondary/90 text-white px-6 py-3 cursor-pointer">
                   {newsletter.buttonLabel}
                 </Button>
               </form>
