@@ -117,7 +117,7 @@ export function HeroSection({ data }: HeroSectionProps) {
                   <Link href={data.primaryCta.url}>
                     <Button
                       size="lg"
-                      className="bg-secondary hover:bg-secondary/90 text-secondary-foreground text-lg px-8 py-4 font-semibold"
+                      className="bg-secondary hover:bg-secondary/90 text-secondary-foreground text-lg px-8 py-4 font-semibold cursor-pointer"
                     >
                       {data.primaryCta.label}
                     </Button>
@@ -132,7 +132,7 @@ export function HeroSection({ data }: HeroSectionProps) {
                     <Button
                       size="lg"
                       variant="outline"
-                      className="border-2 border-white text-white hover:bg-white hover:text-primary text-lg px-8 py-4 font-semibold bg-transparent"
+                      className="border-2 border-white text-white hover:bg-white hover:text-primary text-lg px-8 py-4 font-semibold bg-transparent cursor-pointer"
                     >
                       {data.secondaryCta.icon === "Phone" && <Phone className="mr-2 h-5 w-5" />}
                       {data.secondaryCta.label}

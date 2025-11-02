@@ -284,7 +284,7 @@ export default function PracticeAreasPage() {
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="bg-secondary hover:bg-secondary/90 text-white px-8 py-3 rounded-lg font-semibold transition-colors"
+                    className="bg-secondary hover:bg-secondary/90 text-white px-8 py-3 rounded-lg font-semibold transition-colors cursor-pointer"
                   >
                     Schedule Consultation
                   </motion.button>
@@ -293,7 +293,7 @@ export default function PracticeAreasPage() {
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="border-2 border-primary text-primary hover:bg-primary hover:text-white px-8 py-3 rounded-lg font-semibold transition-all bg-transparent"
+                    className="border-2 border-primary text-primary hover:bg-primary hover:text-white px-8 py-3 rounded-lg font-semibold transition-all bg-transparent cursor-pointer"
                   >
                     Call +1 (289) 838-2982
                   </motion.button>

@@ -93,7 +93,7 @@ export function ContactSection({ data }: ContactSectionProps) {
 
               {data.primaryCta && (
                 <Link href={data.primaryCta.url}>
-                  <Button variant="secondary" size="lg" className="w-full mt-6 hover:scale-[1.02] transition">
+                  <Button variant="secondary" size="lg" className="w-full mt-6 hover:scale-[1.02] transition cursor-pointer">
                     {data.primaryCta.label}
                   </Button>
                 </Link>

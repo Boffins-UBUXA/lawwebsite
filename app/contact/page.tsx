@@ -153,7 +153,7 @@ export default async function ContactPage() {
                           }
                         })}
 
-                        <Button className="w-full bg-secondary hover:bg-secondary/90 text-white">
+                        <Button className="w-full bg-secondary hover:bg-secondary/90 text-white cursor-pointer">
                           <Send className="h-4 w-4 mr-2" />
                           {contactCTASection.formSubmitLabel}
                         </Button>
@@ -183,7 +183,7 @@ export default async function ContactPage() {
                 />
                 <Button
                   variant="outline"
-                  className="border-secondary text-secondary hover:bg-secondary hover:text-white bg-transparent"
+                  className="border-secondary text-secondary hover:bg-secondary hover:text-white bg-transparent cursor-pointer"
                 >
                   <Link href={legalAidSection.primaryCta.url}>{legalAidSection.primaryCta.label}</Link>
                 </Button>

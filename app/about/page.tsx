@@ -61,7 +61,7 @@ export default async function AboutPage() {
                     dangerouslySetInnerHTML={{ __html: missionSection.body }}
                   />
                   <Link href={missionSection.cta.url}>
-                    <Button className="bg-secondary hover:bg-secondary/90 text-white px-6 py-3 text-lg font-medium transition hover:scale-[1.02]">
+                    <Button className="bg-secondary hover:bg-secondary/90 text-white px-6 py-3 text-lg font-medium transition hover:scale-[1.02] cursor-pointer">
                       {missionSection.cta.label}
                     </Button>
                   </Link>
@@ -161,7 +161,7 @@ export default async function AboutPage() {
                 <Link href={legalAidSection.primaryCta.url}>
                   <Button
                     variant="outline"
-                    className="border-secondary text-secondary hover:bg-secondary hover:text-white bg-transparent transition hover:scale-[1.02]"
+                    className="border-secondary text-secondary hover:bg-secondary hover:text-white bg-transparent transition hover:scale-[1.02] cursor-pointer"
                   >
                     {legalAidSection.primaryCta.label}
                   </Button>
