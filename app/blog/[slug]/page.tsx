@@ -116,14 +116,14 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4 justify-center">
                     <Link href="/contact">
-                      <Button className="bg-secondary hover:bg-secondary/90 text-white shadow-lg hover:shadow-xl transition-all px-8 py-6 text-lg">
+                      <Button className="bg-secondary hover:bg-secondary/90 text-white shadow-lg hover:shadow-xl transition-all px-8 py-6 text-lg cursor-pointer">
                         Schedule Consultation
                       </Button>
                     </Link>
                     <a href="tel:+12898382982">
                       <Button
                         variant="outline"
-                        className="border-2 border-primary text-primary hover:bg-primary hover:text-white bg-transparent shadow-lg hover:shadow-xl transition-all px-8 py-6 text-lg"
+                        className="border-2 border-primary text-primary hover:bg-primary hover:text-white bg-transparent shadow-lg hover:shadow-xl transition-all px-8 py-6 text-lg cursor-pointer"
                       >
                         Call +1 (289) 838-2982
                       </Button>
