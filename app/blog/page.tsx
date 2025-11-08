@@ -1,5 +1,6 @@
 "use client"
 
+import { useState, type FormEvent } from "react"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -7,7 +8,50 @@ import { Button } from "@/components/ui/button"
 import { Calendar, User, ArrowRight } from "lucide-react"
 import Link from "next/link"
 
+type NewsletterStatus = "idle" | "loading" | "success" | "error"
+
 export default function BlogPage() {
+  const [email, setEmail] = useState("")
+  const [status, setStatus] = useState<NewsletterStatus>("idle")
+  const [feedback, setFeedback] = useState<string | null>(null)
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+
+    if (!email.trim()) {
+      setStatus("error")
+      setFeedback("Please enter your email address.")
+      return
+    }
+
+    setStatus("loading")
+    setFeedback(null)
+
+    try {
+      const response = await fetch("/api/newsletter", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-form-source": "law-blog-newsletter",
+        },
+        body: JSON.stringify({ email, source: "law-blog-newsletter" }),
+      })
+
+      const body = await response.json().catch(() => ({}))
+
+      if (!response.ok) {
+        throw new Error(body?.message || "We couldn't subscribe you right now.")
+      }
+
+      setStatus("success")
+      setFeedback(body?.message || "Thanks for subscribing!")
+      setEmail("")
+    } catch (error: any) {
+      setStatus("error")
+      setFeedback(error?.message || "We couldn't subscribe you right now.")
+    }
+  }
+
   const blogPosts = [
     {
       title: "Understanding Immigration Law Changes in 2024",
@@ -156,26 +200,35 @@ export default function BlogPage() {
                 inbox.
               </p>
 
-              <form
-                onSubmit={(e) => e.preventDefault()}
-                className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto"
-              >
+              <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
                 <input
                   type="email"
                   placeholder="Enter your email address"
                   className="flex-1 px-4 py-3 border border-input rounded-md bg-background focus:outline-none focus:ring-2 focus:ring-secondary"
+                  value={email}
+                  onChange={(event) => setEmail(event.target.value)}
+                  autoComplete="email"
+                  required
+                  disabled={status === "loading"}
                 />
                 <Button
                   type="submit"
                   className="bg-secondary hover:bg-secondary/90 text-white px-6 py-3"
+                  disabled={status === "loading"}
                 >
-                  Subscribe
+                  {status === "loading" ? "Subscribing..." : "Subscribe"}
                 </Button>
               </form>
 
-              <p className="text-xs text-muted-foreground mt-4">
-                We respect your privacy. Unsubscribe at any time.
-              </p>
+              {feedback ? (
+                <p className={`text-sm mt-4 ${status === "error" ? "text-red-600" : "text-secondary"}`}>
+                  {feedback}
+                </p>
+              ) : (
+                <p className="text-xs text-muted-foreground mt-4">
+                  We respect your privacy. Unsubscribe at any time.
+                </p>
+              )}
             </div>
           </div>
         </section>
