@@ -324,7 +324,7 @@ export default function ContactPage() {
 
                       <Button
                         type="submit"
-                        className="w-full bg-secondary hover:bg-secondary/90 text-white"
+                        className="w-full bg-secondary hover:bg-secondary/90 text-white cursor-pointer"
                         disabled={status === "loading"}
                       >
                         {status === "loading" ? (
@@ -363,7 +363,7 @@ export default function ContactPage() {
               </p>
               <Button
                 variant="outline"
-                className="border-secondary text-secondary hover:bg-secondary hover:text-white bg-transparent"
+                className="border-secondary text-secondary hover:bg-secondary hover:text-white bg-transparent cursor-pointer"
               >
                 <Link href="/legal-aid">Learn About Legal Aid Eligibility</Link>
               </Button>

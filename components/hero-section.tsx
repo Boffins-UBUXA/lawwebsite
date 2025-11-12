@@ -4,8 +4,21 @@ import { Button } from "@/components/ui/button"
 import { Phone } from "lucide-react"
 import { motion } from "framer-motion"
 import Link from "next/link"
+import type { HeroBlock } from "@/lib/api/law-home-page"
+import { stripHtml } from "@/lib/api/law-home-page"
 
-export function HeroSection() {
+interface HeroSectionProps {
+  data: HeroBlock;
+}
+
+export function HeroSection({ data }: HeroSectionProps) {
+  // Strip HTML from description
+  const descriptionParts = data.description
+    .split('</p>')
+    .filter(Boolean)
+    .map(part => stripHtml(part).trim())
+    .filter(Boolean);
+
   return (
     <section id="home" className="relative min-h-screen flex items-center overflow-hidden">
       {/* Background Image */}
@@ -56,14 +69,16 @@ export function HeroSection() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="min-h-[80vh] flex items-center">
           <div className="text-white w-full">
-            {/* Intro Text */}
+            {/* Eyebrow Text */}
             <motion.div
               initial={{ y: 30, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.2 }}
               className="mb-4"
             >
-              <span className="text-secondary font-medium tracking-wider uppercase text-sm">BEKWYN LAW PC</span>
+              <span className="text-secondary font-medium tracking-wider uppercase text-sm">
+                {data.eyebrow}
+              </span>
             </motion.div>
 
             {/* Heading */}
@@ -73,29 +88,21 @@ export function HeroSection() {
               transition={{ duration: 1, delay: 0.4 }}
               className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold mb-6 leading-tight"
             >
-              Ontario Lawyers You Can Trust To Protect What Matters Most To You.
+              {data.title}
             </motion.h1>
 
-            {/* Description */}
-            <motion.p
-              initial={{ y: 30, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-              className="text-lg md:text-xl mb-8 text-white/90 leading-relaxed"
-            >
-              At Bekwyn Law, we believe that law is about people, not just paperwork. We proudly serve
-              individuals, families, and businesses with practical, compassionate, and results-driven legal
-              support across Immigration, Family Law, Litigation, Employment Law, and Estate Planning.
-            </motion.p>
-
-            <motion.p
-              initial={{ y: 30, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-              className="text-lg md:text-xl mb-8 text-white/90 leading-relaxed"
-            >
-              Bekwyn Law: Dedication that defends. Integrity that endures.
-            </motion.p>
+            {/* Description paragraphs */}
+            {descriptionParts.map((paragraph, index) => (
+              <motion.p
+                key={index}
+                initial={{ y: 30, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.8, delay: 0.6 + (index * 0.1) }}
+                className="text-lg md:text-xl mb-8 text-white/90 leading-relaxed"
+              >
+                {paragraph}
+              </motion.p>
+            ))}
 
             {/* Buttons */}
             <motion.div
@@ -104,32 +111,35 @@ export function HeroSection() {
               transition={{ duration: 0.8, delay: 0.8 }}
               className="flex flex-col sm:flex-row gap-4 mb-8"
             >
-              {/* REQUEST AN APPOINTMENT */}
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                {/* Add #form anchor for auto-scroll */}
-                <Link href="/contact#form">
-                  <Button
-                    size="lg"
-                    className="bg-secondary hover:bg-secondary/90 text-secondary-foreground text-lg px-8 py-4 font-semibold"
-                  >
-                    REQUEST AN APPOINTMENT
-                  </Button>
-                </Link>
-              </motion.div>
+              {/* Primary CTA */}
+              {data.primaryCta && (
+                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                  <Link href={data.primaryCta.url}>
+                    <Button
+                      size="lg"
+                      className="bg-secondary hover:bg-secondary/90 text-secondary-foreground text-lg px-8 py-4 font-semibold cursor-pointer"
+                    >
+                      {data.primaryCta.label}
+                    </Button>
+                  </Link>
+                </motion.div>
+              )}
 
-              {/* PHONE BUTTON (click to call) */}
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <a href="tel:+12898382982">
-                  <Button
-                    size="lg"
-                    variant="outline"
-                    className="border-2 border-white text-white hover:bg-white hover:text-primary text-lg px-8 py-4 font-semibold bg-transparent"
-                  >
-                    <Phone className="mr-2 h-5 w-5" />
-                    +1 (289) 838-2982
-                  </Button>
-                </a>
-              </motion.div>
+              {/* Secondary CTA (Phone Button) */}
+              {data.secondaryCta && (
+                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                  <a href={data.secondaryCta.url}>
+                    <Button
+                      size="lg"
+                      variant="outline"
+                      className="border-2 border-white text-white hover:bg-white hover:text-primary text-lg px-8 py-4 font-semibold bg-transparent cursor-pointer"
+                    >
+                      {data.secondaryCta.icon === "Phone" && <Phone className="mr-2 h-5 w-5" />}
+                      {data.secondaryCta.label}
+                    </Button>
+                  </a>
+                </motion.div>
+              )}
             </motion.div>
           </div>
         </div>
