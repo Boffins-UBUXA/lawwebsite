@@ -57,7 +57,7 @@ export default async function NotaryPage() {
                   />
                   <div className="flex flex-col sm:flex-row gap-4">
                     <Link href={heroSection.primaryCta.url}>
-                      <Button size="lg" className="text-lg px-8 hover:scale-[1.02] transition">
+                      <Button size="lg" className="text-lg px-8 hover:scale-[1.02] transition cursor-pointer">
                         {heroSection.primaryCta.label}
                       </Button>
                     </Link>
@@ -65,7 +65,7 @@ export default async function NotaryPage() {
                       <Button
                         variant="outline"
                         size="lg"
-                        className="text-lg px-8 bg-transparent hover:scale-[1.02] transition"
+                        className="text-lg px-8 bg-transparent hover:scale-[1.02] transition cursor-pointer"
                       >
                         {heroSection.secondaryCta.label}
                       </Button>
@@ -240,7 +240,7 @@ export default async function NotaryPage() {
                         )
                       }
                     })}
-                    <Button className="w-full hover:scale-[1.02] transition">{contactSection.formSubmitLabel}</Button>
+                    <Button className="w-full hover:scale-[1.02] transition cursor-pointer">{contactSection.formSubmitLabel}</Button>
                   </form>
                 </Card>
               </div>
