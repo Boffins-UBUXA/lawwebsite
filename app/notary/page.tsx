@@ -50,6 +50,29 @@ export default function NotaryPage() {
     })
   }, [])
 
+  // Handle smooth scroll to hash on mount and hash change
+  useEffect(() => {
+    const handleHashScroll = () => {
+      const hash = window.location.hash
+      if (hash) {
+        const element = document.querySelector(hash)
+        if (element) {
+          setTimeout(() => {
+            element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+          }, 100)
+        }
+      }
+    }
+
+    // Scroll on initial load if hash exists
+    handleHashScroll()
+
+    // Listen for hash changes
+    window.addEventListener('hashchange', handleHashScroll)
+    
+    return () => window.removeEventListener('hashchange', handleHashScroll)
+  }, [loading])
+
   const handleChange =
     (field: keyof typeof initialForm) =>
     (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -89,12 +112,10 @@ export default function NotaryPage() {
         throw new Error(detail)
       }
 
-      // Success even if Strapi failed but email was sent
       setStatus("success")
       setFeedback("Thank you! We've received your inquiry and will respond within 24 hours.")
       setFormData(initialForm)
       
-      // Scroll to feedback message
       setTimeout(() => {
         const feedbackElement = document.querySelector('[data-feedback]')
         feedbackElement?.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
@@ -189,9 +210,9 @@ export default function NotaryPage() {
           </section>
         )}
 
-        {/* SERVICES GRID */}
+        {/* SERVICES GRID - Added id="services" */}
         {serviceGrid && (
-          <section className="py-20 bg-background">
+          <section id="services" className="py-20 bg-background scroll-mt-20">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
               <div className="text-center mb-16">
                 <h2 className="text-3xl md:text-4xl font-serif font-bold mb-4 text-foreground">{serviceGrid.title}</h2>
@@ -251,9 +272,9 @@ export default function NotaryPage() {
           </section>
         )}
 
-        {/* CONTACT SECTION */}
+        {/* CONTACT SECTION - Added id="contact" */}
         {contactSection && (
-          <section className="py-20 bg-background">
+          <section id="contact" className="py-20 bg-background scroll-mt-20">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
               <div className="grid lg:grid-cols-2 gap-12 items-center">
                 {/* Left */}
@@ -326,7 +347,6 @@ export default function NotaryPage() {
                           </div>
                         )
                       } else {
-                        // Map field labels to form data keys
                         const fieldKey =
                           field.label.toLowerCase().includes("name")
                             ? "name"
@@ -378,7 +398,10 @@ export default function NotaryPage() {
                     )}
 
                     {feedback && (
-                      <p className={`text-sm ${status === "success" ? "text-green-600" : "text-red-600"}`}>
+                      <p 
+                        data-feedback
+                        className={`text-sm ${status === "success" ? "text-green-600" : "text-red-600"}`}
+                      >
                         {feedback}
                       </p>
                     )}
