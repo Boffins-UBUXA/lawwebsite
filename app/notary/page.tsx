@@ -1,3 +1,6 @@
+"use client"
+
+import { useState, type ChangeEvent, type FormEvent, useEffect } from "react"
 import type React from "react"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
@@ -21,8 +24,94 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   MapPin,
 }
 
-export default async function NotaryPage() {
-  const pageData = await getLawNotaryPage()
+type FormStatus = "idle" | "loading" | "success" | "error"
+
+const initialForm = {
+  name: "",
+  email: "",
+  phone: "",
+  service: "",
+  message: "",
+  company: "",
+}
+
+export default function NotaryPage() {
+  const [pageData, setPageData] = useState<any>(null)
+  const [loading, setLoading] = useState(true)
+  const [formData, setFormData] = useState(initialForm)
+  const [status, setStatus] = useState<FormStatus>("idle")
+  const [errors, setErrors] = useState<string[]>([])
+  const [feedback, setFeedback] = useState<string | null>(null)
+
+  useEffect(() => {
+    getLawNotaryPage().then((data) => {
+      setPageData(data)
+      setLoading(false)
+    })
+  }, [])
+
+  const handleChange =
+    (field: keyof typeof initialForm) =>
+    (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+      setFormData((prev) => ({ ...prev, [field]: event.target.value }))
+    }
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    setErrors([])
+    setFeedback(null)
+
+    const validationErrors: string[] = []
+    if (!formData.name.trim()) validationErrors.push("Name is required.")
+    if (!formData.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email))
+      validationErrors.push("A valid email address is required.")
+    if (!formData.message.trim()) validationErrors.push("Message is required.")
+
+    if (validationErrors.length) {
+      setStatus("error")
+      setErrors(validationErrors)
+      return
+    }
+
+    setStatus("loading")
+
+    try {
+      const response = await fetch("/api/notary", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      })
+
+      const body = await response.json().catch(() => ({}))
+
+      if (!response.ok) {
+        const detail = body?.error || body?.errors?.[0] || "We couldn't send your message right now."
+        throw new Error(detail)
+      }
+
+      // Success even if Strapi failed but email was sent
+      setStatus("success")
+      setFeedback("Thank you! We've received your inquiry and will respond within 24 hours.")
+      setFormData(initialForm)
+      
+      // Scroll to feedback message
+      setTimeout(() => {
+        const feedbackElement = document.querySelector('[data-feedback]')
+        feedbackElement?.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
+      }, 100)
+    } catch (error: any) {
+      setStatus("error")
+      setFeedback(error?.message || "We couldn't send your message right now.")
+    }
+  }
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        {/* <p className="text-xl text-muted-foreground">Loading...</p> */}
+      </div>
+    )
+  }
 
   if (!pageData) {
     return (
@@ -196,10 +285,10 @@ export default async function NotaryPage() {
                   </div>
                 </div>
 
-                {/* Right */}
+                {/* Right - Form */}
                 <Card className="p-8 border-border h-full flex flex-col justify-between">
                   <h3 className="text-2xl font-serif font-bold mb-6 text-foreground">{contactSection.formTitle}</h3>
-                  <form className="space-y-4">
+                  <form className="space-y-4" onSubmit={handleSubmit} noValidate>
                     {contactSection.formFields.map((field) => {
                       if (field.fieldType === "textarea") {
                         return (
@@ -209,6 +298,10 @@ export default async function NotaryPage() {
                               rows={4}
                               className="w-full px-3 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary bg-background text-foreground"
                               placeholder={field.placeholder}
+                              value={formData.message}
+                              onChange={handleChange("message")}
+                              required={field.required}
+                              disabled={status === "loading"}
                             />
                           </div>
                         )
@@ -216,18 +309,33 @@ export default async function NotaryPage() {
                         return (
                           <div key={field.id}>
                             <label className="block text-sm font-medium text-foreground mb-2">{field.label}</label>
-                            <select className="w-full px-3 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary bg-background text-foreground">
-                              <option>{field.placeholder}</option>
-                              <option>Document Certification</option>
-                              <option>Affidavit Witnessing</option>
-                              <option>Signature Witnessing</option>
-                              <option>Travel Documents</option>
-                              <option>Real Estate Documents</option>
-                              <option>Other</option>
+                            <select
+                              className="w-full px-3 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary bg-background text-foreground"
+                              value={formData.service}
+                              onChange={handleChange("service")}
+                              disabled={status === "loading"}
+                            >
+                              <option value="">{field.placeholder}</option>
+                              <option value="document-certification">Document Certification</option>
+                              <option value="affidavit-witnessing">Affidavit Witnessing</option>
+                              <option value="signature-witnessing">Signature Witnessing</option>
+                              <option value="travel-documents">Travel Documents</option>
+                              <option value="real-estate">Real Estate Documents</option>
+                              <option value="other">Other</option>
                             </select>
                           </div>
                         )
                       } else {
+                        // Map field labels to form data keys
+                        const fieldKey =
+                          field.label.toLowerCase().includes("name")
+                            ? "name"
+                            : field.label.toLowerCase().includes("email")
+                              ? "email"
+                              : field.label.toLowerCase().includes("phone")
+                                ? "phone"
+                                : "name"
+
                         return (
                           <div key={field.id}>
                             <label className="block text-sm font-medium text-foreground mb-2">{field.label}</label>
@@ -235,12 +343,53 @@ export default async function NotaryPage() {
                               type={field.fieldType}
                               className="w-full px-3 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary bg-background text-foreground"
                               placeholder={field.placeholder}
+                              value={formData[fieldKey as keyof typeof formData]}
+                              onChange={handleChange(fieldKey as keyof typeof formData)}
+                              required={field.required}
+                              disabled={status === "loading"}
                             />
                           </div>
                         )
                       }
                     })}
-                    <Button className="w-full hover:scale-[1.02] transition cursor-pointer">{contactSection.formSubmitLabel}</Button>
+
+                    {/* Honeypot field */}
+                    <div className="hidden" aria-hidden="true">
+                      <label htmlFor="company" className="sr-only">
+                        Company
+                      </label>
+                      <input
+                        id="company"
+                        name="company"
+                        type="text"
+                        tabIndex={-1}
+                        autoComplete="off"
+                        value={formData.company}
+                        onChange={handleChange("company")}
+                      />
+                    </div>
+
+                    {errors.length > 0 && (
+                      <div className="text-sm text-red-600 space-y-1">
+                        {errors.map((error) => (
+                          <p key={error}>{error}</p>
+                        ))}
+                      </div>
+                    )}
+
+                    {feedback && (
+                      <p className={`text-sm ${status === "success" ? "text-green-600" : "text-red-600"}`}>
+                        {feedback}
+                      </p>
+                    )}
+
+                    <Button
+                      type="submit"
+                      className="w-full hover:scale-[1.02] transition cursor-pointer"
+                      disabled={status === "loading"}
+                    >
+                      {status === "loading" ? "Sending..." : contactSection.formSubmitLabel}
+                    </Button>
                   </form>
                 </Card>
               </div>
